@@ -1,0 +1,291 @@
+/* ============================================
+     TOKENS — edit these to re-theme the whole site
+     ============================================ */
+  :root{
+    --lavender-blush: #FAE8ED;   /* client's brand pink #1 */
+    --mimi-pink:      #FDD5DF;   /* client's brand pink #2 */
+    --ink:            #1A1A1A;   /* logo black */
+    --paper:          #FFFFFF;   /* logo background — swap this to re-theme the logo lockup */
+    --mauve:          #8C5A66;   /* deeper tone, pulled out of the pinks, used for readable text on light pink */
+    --nude:           #EFD9C7;   /* swatch shade */
+    --whatsapp:       #3BA55A;
+
+    --pop-coral:  #FF6F5E;
+    --pop-mustard:#E8B23A;
+    --pop-teal:   #2FBFAE;
+    --pop-violet: #9B6FD1;
+    --pop-red:    #E63950;
+
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'Jost', sans-serif;
+
+    --radius-soft: 22px;
+    --radius-pill: 999px;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    font-family: var(--font-body);
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  img{ max-width:100%; display:block; }
+  a{ color:inherit; }
+  section{ padding: 96px 24px; }
+  .wrap{ max-width: 1080px; margin: 0 auto; }
+  h1,h2,h3{ font-family: var(--font-display); font-weight: 500; }
+  .eyebrow{
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 12px;
+    color: var(--mauve);
+    margin-bottom: 14px;
+    display:block;
+  }
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding: 16px 34px;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-body);
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+    cursor:pointer;
+    transition: transform .25s ease, background .25s ease, color .25s ease;
+    text-decoration:none;
+  }
+  .btn:hover{ transform: translateY(-2px); }
+  .btn.ghost{ background:transparent; color:var(--ink); }
+  .btn.ghost:hover{ background: var(--ink); color: var(--paper); }
+  .btn:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible{
+    outline: 2px solid var(--mauve); outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; scroll-behavior:auto !important;}
+  }
+
+  /* ============ NAV ============ */
+  header{
+    position: sticky; top:0; z-index: 50;
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--mimi-pink);
+  }
+  .nav{
+    max-width:1080px; margin:0 auto;
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 16px 24px;
+  }
+  .logo-mark{ display:flex; align-items:center; gap:12px; }
+  /* Real logo goes here — drop an <img> in .logo-mark and remove .logo-word,
+     or keep the wordmark as a text-based placeholder until the artwork is ready. */
+  .logo-word{ font-family: var(--font-display); font-size: 21px; letter-spacing:0.02em; font-style:italic; }
+  .logo-word b{ font-weight:600; font-style:normal; }
+
+  .menu-btn{
+    background:none; border:none; cursor:pointer;
+    display:flex; flex-direction:column; justify-content:center; align-items:flex-end;
+    gap:5px; width:34px; height:34px; padding:0;
+  }
+  .menu-btn span{
+    display:block; height:2px; background:var(--ink); border-radius:2px;
+    transition: transform .25s ease, width .25s ease, opacity .25s ease;
+  }
+  .menu-btn span:nth-child(1){ width:26px; }
+  .menu-btn span:nth-child(2){ width:20px; }
+  .menu-btn span:nth-child(3){ width:26px; }
+  .menu-btn[aria-expanded="true"] span{ width:26px; }
+  .menu-btn[aria-expanded="true"] span:nth-child(1){ transform: translateY(7px) rotate(45deg); }
+  .menu-btn[aria-expanded="true"] span:nth-child(2){ opacity:0; }
+  .menu-btn[aria-expanded="true"] span:nth-child(3){ transform: translateY(-7px) rotate(-45deg); }
+
+  .menu-panel{
+    max-height:0; overflow:hidden;
+    background: var(--ink);
+    transition: max-height .35s ease;
+  }
+  .menu-panel.open{ max-height:320px; }
+  .menu-panel ul{ list-style:none; padding: 8px 24px 20px; max-width:1080px; margin:0 auto; }
+  .menu-panel a{
+    display:block; padding: 14px 0; color: var(--paper);
+    font-family: var(--font-display); font-style:italic; font-size:22px;
+    text-decoration:none; border-bottom: 1px solid rgba(255,255,255,0.12);
+  }
+  .menu-panel .btn{ margin-top:16px; }
+
+  /* ============ HERO ============ */
+  .hero{
+    padding: 72px 24px 100px;
+    background: linear-gradient(180deg, var(--lavender-blush) 0%, var(--paper) 100%);
+    text-align:center;
+  }
+  .hero h1{
+    font-size: clamp(42px, 8vw, 84px);
+    font-style: italic;
+    line-height: 1.02;
+    max-width: 780px;
+    margin: 0 auto 22px;
+  }
+  .hero p.lead{
+    max-width: 480px; margin: 0 auto 36px;
+    color: var(--mauve); font-size: 17px;
+  }
+  .hero-actions{ display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+  .hero-note{
+    margin-top:34px; font-size:13px; color:var(--mauve);
+    letter-spacing:0.03em;
+  }
+
+  /* nail swatch strip — signature element, echoed through the page */
+  .swatch-strip{
+    display:flex; justify-content:center; gap:12px; margin: 46px auto 0; flex-wrap:wrap;
+  }
+  .swatch{
+    width: 34px; height: 46px;
+    border-radius: 17px 17px 6px 6px;
+    box-shadow: inset 0 -4px 8px rgba(0,0,0,0.08);
+  }
+
+  /* ============ ABOUT ============ */
+  .about{ display:grid; gap:48px; align-items:center; }
+  @media(min-width:800px){ .about{ grid-template-columns: 1fr 1fr; } }
+  .about-copy p{ margin-top:16px; color:#4a4a4a; max-width:46ch; }
+  .about-frame{
+    background: var(--mimi-pink);
+    border-radius: var(--radius-soft);
+    aspect-ratio: 4/5;
+    display:flex; align-items:center; justify-content:center;
+    font-family: var(--font-display); font-style:italic; color:var(--paper);
+    font-size:22px; text-align:center; padding: 30px;
+  }
+
+  /* ============ SERVICES ============ */
+  .services{ background: var(--lavender-blush); }
+  .service-grid{ display:grid; gap:18px; margin-top:44px; }
+  @media(min-width:640px){ .service-grid{ grid-template-columns: 1fr 1fr; } }
+  .service-card{
+    background: var(--paper);
+    border-radius: var(--radius-soft);
+    padding: 26px 28px;
+    display:flex; align-items:flex-start; gap:18px;
+  }
+  .service-card .swatch{ flex-shrink:0; margin-top:4px; }
+  .service-card h3{ font-size:20px; font-weight:500; margin-bottom:6px; }
+  .service-card .price{ color:var(--mauve); font-size:14px; margin-bottom:8px; display:block; }
+  .service-card p{ font-size:14px; color:#555; }
+
+  /* ============ SHAPES & COLOUR ============ */
+  .shapes-row{
+    display:flex; gap:22px; margin-top:48px; flex-wrap:wrap;
+    justify-content:center;
+  }
+  .shape-card{ text-align:center; width:78px; }
+  .shape{
+    width:56px; height:78px; margin:0 auto 12px;
+    box-shadow: inset 0 -6px 10px rgba(0,0,0,0.12);
+  }
+  .shape-card span{ font-size:12px; color:#6a6062; letter-spacing:0.02em; }
+
+  .shape-round{ border-radius: 50% 50% 42% 42% / 62% 62% 30% 30%; }
+  .shape-square{ border-radius: 8px 8px 3px 3px; }
+  .shape-oval{ border-radius: 50% 50% 18% 18% / 72% 72% 14% 14%; }
+  .shape-almond{ clip-path: polygon(50% 0%, 92% 34%, 76% 100%, 24% 100%, 8% 34%); }
+  .shape-coffin{ clip-path: polygon(28% 0%, 72% 0%, 100% 68%, 78% 100%, 22% 100%, 0% 68%); }
+  .shape-stiletto{ clip-path: polygon(50% 0%, 100% 78%, 74% 100%, 26% 100%, 0% 78%); }
+
+  .mix-set{
+    margin-top:56px; background: var(--paper); border-radius: var(--radius-soft);
+    padding: 34px 28px; text-align:center;
+  }
+  .mix-set h3{ font-size:22px; font-weight:500; margin-bottom:6px; }
+  .mix-set p{ font-size:14px; color:#6a6062; max-width:40ch; margin:0 auto 30px; }
+  .mix-hand{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+  .mix-hand .shape{ width:44px; height:62px; margin-bottom:0; }
+
+  /* ============ GALLERY / INSPO ============ */
+  .gallery-grid{
+    display:grid; grid-template-columns: repeat(3,1fr); gap:12px; margin-top:40px;
+  }
+  .gallery-grid div{
+    aspect-ratio:1; border-radius: 14px;
+  }
+
+  /* ============ BOOKING ============ */
+  .booking{ background: var(--ink); color: var(--paper); }
+  .booking .eyebrow{ color: var(--mimi-pink); }
+  .booking h2{ color:var(--paper); }
+  .booking-intro{ max-width:520px; color:#d9d0d3; margin-top:14px; font-size:15px; }
+  .availability-note{
+    margin-top:22px; padding:14px 18px; border-radius:14px;
+    background: rgba(253,213,223,0.12); border:1px solid rgba(253,213,223,0.3);
+    font-size:13.5px; color: var(--mimi-pink); max-width:520px;
+  }
+  form{ margin-top:44px; display:grid; gap:20px; max-width: 620px; }
+  .field-row{ display:grid; gap:20px; }
+  @media(min-width:600px){ .field-row.two{ grid-template-columns:1fr 1fr; } }
+  label{ font-size:13px; text-transform:uppercase; letter-spacing:0.05em; color:#cfc4c8; display:block; margin-bottom:8px; }
+  input, select, textarea{
+    width:100%; padding: 13px 16px; border-radius:12px;
+    border: 1px solid #444; background: #262222; color: var(--paper);
+    font-family: var(--font-body); font-size:15px;
+  }
+  input::placeholder, textarea::placeholder{ color:#8a8283; }
+  textarea{ resize:vertical; min-height:90px; }
+
+  fieldset{ border:none; padding:0; }
+  .pay-options{ display:flex; gap:12px; flex-wrap:wrap; }
+  .pay-option{
+    flex:1; min-width:160px;
+    border:1px solid #444; border-radius:14px; padding:16px;
+    cursor:pointer; position:relative;
+  }
+  .pay-option input{ position:absolute; opacity:0; }
+  .pay-option span.label{ font-size:15px; display:block; font-weight:500; width:auto; text-transform:none; letter-spacing:0; color:var(--paper); }
+  .pay-option span.sub{ font-size:12.5px; color:#a89ea1; display:block; margin-top:4px; }
+  .pay-option:has(input:checked){ border-color: var(--mimi-pink); background: rgba(253,213,223,0.08); }
+
+  .upload-box{
+    border:1.5px dashed #555; border-radius:14px; padding:22px;
+    text-align:center; cursor:pointer; font-size:13.5px; color:#a89ea1;
+  }
+  .upload-box.has-file{ border-color: var(--mimi-pink); color: var(--mimi-pink); }
+  #inspo-preview{ margin-top:14px; max-width:140px; border-radius:10px; display:none; }
+
+  .form-msg{
+    display:none; padding:14px 18px; border-radius:12px;
+    background: rgba(253,213,223,0.12); border:1px solid var(--mimi-pink);
+    color: var(--mimi-pink); font-size:14px;
+  }
+  .form-msg.show{ display:block; }
+
+  /* ============ FOOTER ============ */
+  footer{
+    background: var(--paper); padding: 56px 24px 40px;
+    border-top: 1px solid var(--mimi-pink);
+    text-align:center;
+  }
+  footer .logo-mark{ justify-content:center; margin-bottom:18px; }
+  footer p{ font-size:13px; color:#9a8f92; margin-top:6px; }
+  footer .foot-links{ display:flex; gap:22px; justify-content:center; margin-top:18px; list-style:none; flex-wrap:wrap; }
+  footer .foot-links a{ font-size:13px; text-decoration:none; color: var(--mauve); }
+
+  /* ============ WHATSAPP WIDGET ============ */
+  .wa-float{
+    position: fixed; bottom: 24px; right: 24px; z-index: 60;
+    display:flex; align-items:center; gap:10px;
+    background: var(--whatsapp); color:#fff;
+    padding: 14px 20px 14px 16px; border-radius: var(--radius-pill);
+    text-decoration:none; box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+    font-size:14px; font-family: var(--font-body); font-weight:500;
+    transition: transform .2s ease;
+  }
+  .wa-float:hover{ transform: translateY(-3px); }
+  .wa-float svg{ width:22px; height:22px; flex-shrink:0; }
