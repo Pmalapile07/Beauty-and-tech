@@ -139,6 +139,7 @@
     padding: 20px 4px; border-bottom: 1px solid var(--line); transition: padding-left 0.25s, background 0.25s;
   }
   .menu-row:hover { padding-left: 12px; background: rgba(240,175,192,0.12); }
+  .menu-row.active { padding-left: 12px; background: rgba(240,175,192,0.12); }
 
   .nail-icon {
     width: 22px; height: 30px;
@@ -148,6 +149,7 @@
     transition: transform 0.25s ease;
   }
   .menu-row:hover .nail-icon { transform: translateY(-3px); }
+  .menu-row.active .nail-icon { transform: translateY(-3px); }
   .nail-solid { background: var(--pink); }
   .nail-french { background: linear-gradient(to bottom, #ffffff 0%, #ffffff 24%, var(--blush) 24%, var(--blush) 100%); border: 1px solid rgba(20,20,20,0.08); }
   .nail-long { height: 34px; border-radius: 50% 50% 6px 6px / 68% 68% 10% 10%; border: 1.5px solid var(--ink); background: var(--white); }
@@ -347,7 +349,6 @@
       <p>I'm <strong>Irene</strong>. I take a few clients a week — gel, dip, and hand-painted sets — so every appointment gets my full attention.</p>
       <div class="hero-cta">
         <a href="#book" class="btn-primary">Book an appointment</a>
-        <a href="#services" class="btn-ghost">See services</a>
       </div>
     </div>
   </div>
@@ -499,6 +500,11 @@
 </div>
 
 <script>
+  // Service rows — tap toggles the same highlight the hover state gives on desktop
+  document.querySelectorAll('.menu-row').forEach(row => {
+    row.addEventListener('click', () => row.classList.toggle('active'));
+  });
+
   // Gallery — one photo per slide
   const gFrames = document.querySelectorAll('.gallery-frame');
   const gCount = document.querySelector('.gallery-count');
