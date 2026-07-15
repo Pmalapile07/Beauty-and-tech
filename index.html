@@ -44,7 +44,7 @@
     transition: background 0.25s ease;
   }
   .nav-inner { display: flex; align-items: center; justify-content: space-between; }
-  .logo-img { height: 40px; width: auto; display: block; transition: opacity 0.2s ease; }
+  .logo-img { height: 60px; width: auto; display: block; transition: opacity 0.2s ease; }
   .wordmark { display: none; }
 
   /* Links shown inline in place of the logo once you've scrolled past the hero (desktop only) */
@@ -115,11 +115,11 @@
   .btn-ghost:hover { color: var(--ink); border-color: var(--ink); }
 
   .hero-image {
-    width: 100%; aspect-ratio: 4/5; max-height: 620px; border-radius: 8px; overflow: hidden;
+    width: 100%; border-radius: 8px; overflow: hidden;
     background: linear-gradient(155deg, var(--pink-deep), var(--pink), var(--blush));
     position: relative;
   }
-  .hero-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-image img { width: 100%; height: auto; display: block; }
 
   /* ── SECTIONS ── */
   .section { padding: 72px 0; }
@@ -276,9 +276,8 @@
   @media (max-width: 768px) {
     .wrap { padding: 0 20px; }
     nav { padding: 12px 0; }
-    .logo-img { height: 32px; }
+    .logo-img { height: 48px; }
     .hero { padding: 100px 0 40px; }
-    .hero-image { max-height: 420px; }
     .nav-scrolled-links { gap: 14px; }
     .nav-scrolled-links a { font-size: 10.5px; }
     .section { padding: 56px 0; }
@@ -293,9 +292,8 @@
   @media (max-width: 480px) {
     .wrap { padding: 0 16px; }
     nav { padding: 10px 0; }
-    .logo-img { height: 28px; }
+    .logo-img { height: 40px; }
     .hero { padding: 90px 0 32px; }
-    .hero-image { max-height: 340px; }
     .hero h1 { font-size: clamp(32px, 8vw, 48px); }
     .hero p { font-size: 14px; }
     .hero-cta { flex-direction: column; align-items: flex-start; gap: 12px; }
@@ -322,7 +320,6 @@
       <img src="alluring.jpeg" alt="Alluring Beauty Bar" class="logo-img">
     </a>
     <div class="nav-scrolled-links" id="navScrolledLinks">
-      <a href="#services">Services</a>
       <a href="#book">Book</a>
       <a href="#work">Work</a>
       <a href="#visit">Visit</a>
