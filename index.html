@@ -36,33 +36,32 @@
   /* ── NAV ── */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 50;
-    padding: 20px 0;
-    background: rgba(255,255,255,0.92);
+    padding: 16px 0;
+    background: #FFFFFF;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
     transition: background 0.25s ease;
   }
   .nav-inner { display: flex; align-items: center; justify-content: space-between; }
-  .wordmark { font-family: 'Instrument Serif', serif; font-size: 20px; letter-spacing: 0.01em; color: var(--ink); transition: opacity 0.2s ease; }
-  .wordmark span { font-style: italic; color: var(--pink-deep); }
+  .logo-img { height: 40px; width: auto; display: block; transition: opacity 0.2s ease; }
+  .wordmark { display: none; }
 
   /* Links shown inline in place of the logo once you've scrolled past the hero (desktop only) */
   .nav-scrolled-links { display: none; align-items: center; gap: 28px; }
   .nav-scrolled-links a {
     font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-soft);
-    transition: color 0.2s ease;
+    transition: color 0.2s ease; white-space: nowrap;
   }
   .nav-scrolled-links a:hover { color: var(--ink); }
-  nav.scrolled .wordmark { display: none; }
+  nav.scrolled .logo-img { display: none; }
   nav.scrolled .nav-toggle { display: none; }
   nav.scrolled .nav-scrolled-links { display: flex; }
 
   /* Nav dropdown panel — hangs as part of the header, off-canvas until opened */
   .nav-links {
     position: absolute; top: 100%; left: 0; right: 0;
-    background: rgba(255,255,255,0.98);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: #FFFFFF;
     border-bottom: 2px solid var(--pink-deep);
     max-height: 0; overflow: hidden;
     opacity: 0;
@@ -77,7 +76,7 @@
   .nav-links a:first-child { border-top: none; }
   .nav-links a:hover { color: var(--ink); background: rgba(240,175,192,0.12); }
 
-  /* Hamburger toggle, replaces the old Book pill — plain, no circle */
+  /* Hamburger toggle */
   .nav-toggle {
     width: 32px; height: 24px;
     border: none; background: transparent; padding: 0;
@@ -93,7 +92,7 @@
   .nav-toggle.open span:nth-child(2) { transform: translateY(-4.25px) rotate(-45deg); background: var(--pink-deep); }
 
   /* ── HERO ── */
-  .hero { padding: 24px 0 56px; }
+  .hero { padding: 120px 0 56px; }
   .hero-grid { display: flex; flex-direction: column; gap: 32px; width: 100%; }
   .hero h1 {
     font-family: 'Instrument Serif', serif; font-weight: 400;
@@ -102,16 +101,16 @@
   .hero h1 em { font-style: italic; color: var(--pink-deep); }
   .hero p { margin-top: 18px; max-width: 400px; font-size: 15px; line-height: 1.65; color: var(--text-soft); }
   .hero p strong { color: var(--ink); font-weight: 500; }
-  .hero-cta { margin-top: 26px; display: flex; align-items: center; gap: 16px; }
+  .hero-cta { margin-top: 26px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
   .btn-primary {
     display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px;
     background: var(--ink); color: var(--blush); border-radius: 999px; font-size: 14px;
-    letter-spacing: 0.02em; transition: background 0.2s; border: none; cursor: pointer;
+    letter-spacing: 0.02em; transition: background 0.2s; border: none; cursor: pointer; white-space: nowrap;
   }
   .btn-primary:hover { background: #000; }
   .btn-ghost {
     font-size: 13px; letter-spacing: 0.03em; text-transform: uppercase; color: var(--text-soft);
-    border-bottom: 1px solid var(--line); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s;
+    border-bottom: 1px solid var(--line); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; white-space: nowrap;
   }
   .btn-ghost:hover { color: var(--ink); border-color: var(--ink); }
 
@@ -121,12 +120,8 @@
     position: relative;
   }
   .hero-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .hero-image-placeholder {
-    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-    color: rgba(20,20,20,0.45); font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 0.05em;
-  }
 
-  /* ── SECTIONS — plain, normal document flow ── */
+  /* ── SECTIONS ── */
   .section { padding: 72px 0; }
   .section-head {
     display: flex; justify-content: space-between; align-items: flex-end;
@@ -138,7 +133,7 @@
   }
   .section-num { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--text-soft); letter-spacing: 0.06em; white-space: nowrap; }
 
-  /* ── SERVICES + NAIL ART ICONS ── */
+  /* ── SERVICES ── */
   .menu-list { border-top: 1px solid var(--line); }
   .menu-row {
     display: grid; grid-template-columns: 36px 1fr auto auto; align-items: center; gap: 20px;
@@ -166,7 +161,7 @@
   .menu-time { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--text-soft); }
   .menu-price { font-family: 'Space Mono', monospace; font-size: 14px; color: var(--ink); }
 
-  /* ── BOOKING (minimized) ── */
+  /* ── BOOKING ── */
   .booking-mini {
     background: var(--ink); color: var(--blush); border-radius: 16px;
     padding: 56px 40px; min-height: 380px; display: flex; align-items: center; justify-content: space-between;
@@ -180,10 +175,10 @@
     font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.03em; color: rgba(250,232,237,0.75);
     border: 1px solid rgba(250,232,237,0.28); padding: 7px 14px; border-radius: 999px;
   }
-  .btn-book-external { flex-shrink: 0; padding: 15px 30px; background: var(--blush); color: var(--ink); border-radius: 999px; font-size: 14px; letter-spacing: 0.02em; transition: background 0.2s; }
+  .btn-book-external { flex-shrink: 0; padding: 15px 30px; background: var(--blush); color: var(--ink); border-radius: 999px; font-size: 14px; letter-spacing: 0.02em; transition: background 0.2s; white-space: nowrap; }
   .btn-book-external:hover { background: var(--pink); }
 
-  /* ── GALLERY — full-width strip, matches the booking block's width ── */
+  /* ── GALLERY ── */
   .gallery-slider {
     position: relative;
     width: 100%;
@@ -243,22 +238,7 @@
   footer a.link-line:hover { border-color: var(--ink); }
   .foot-bottom { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px; font-size: 11px; color: var(--text-soft); font-family: 'Space Mono', monospace; }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 768px) {
-    .hero { padding: 20px 0 40px; }
-    .hero-image { max-height: 420px; }
-    nav { padding: 16px 0; }
-    .nav-scrolled-links { gap: 14px; }
-    .nav-scrolled-links a { font-size: 10.5px; }
-    .wrap { padding: 0 20px; }
-    .section { padding: 56px 0; }
-    .menu-row { grid-template-columns: 30px 1fr; row-gap: 4px; }
-    .menu-time, .menu-price { grid-column: 2; justify-self: start; }
-    .booking-mini { flex-direction: column; align-items: flex-start; padding: 32px 26px; }
-    .gallery-slider { max-height: 480px; }
-    .footer-grid { grid-template-columns: 1fr; }
-  }
-  /* ── CONTACT FAB — expands to WhatsApp / email / phone ── */
+  /* ── CONTACT FAB ── */
   .fab {
     position: fixed; right: 24px; bottom: 24px; z-index: 60;
     display: flex; flex-direction: column; align-items: center; gap: 12px;
@@ -291,8 +271,46 @@
   .fab-toggle:hover { background: var(--pink); }
   .fab-toggle svg { width: 24px; height: 24px; stroke: var(--ink); fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.3s ease; }
   .fab-toggle.open svg { transform: rotate(45deg); }
+
+  /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
+    .wrap { padding: 0 20px; }
+    nav { padding: 12px 0; }
+    .logo-img { height: 32px; }
+    .hero { padding: 100px 0 40px; }
+    .hero-image { max-height: 420px; }
+    .nav-scrolled-links { gap: 14px; }
+    .nav-scrolled-links a { font-size: 10.5px; }
+    .section { padding: 56px 0; }
+    .menu-row { grid-template-columns: 30px 1fr; row-gap: 4px; }
+    .menu-time, .menu-price { grid-column: 2; justify-self: start; }
+    .booking-mini { flex-direction: column; align-items: flex-start; padding: 32px 26px; }
+    .gallery-slider { max-height: 480px; }
+    .footer-grid { grid-template-columns: 1fr; }
     .fab { right: 18px; bottom: 18px; }
+  }
+
+  @media (max-width: 480px) {
+    .wrap { padding: 0 16px; }
+    nav { padding: 10px 0; }
+    .logo-img { height: 28px; }
+    .hero { padding: 90px 0 32px; }
+    .hero-image { max-height: 340px; }
+    .hero h1 { font-size: clamp(32px, 8vw, 48px); }
+    .hero p { font-size: 14px; }
+    .hero-cta { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .section { padding: 48px 0; }
+    .section-head { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .booking-mini { padding: 28px 20px; min-height: auto; }
+    .booking-mini-title { font-size: clamp(32px, 8vw, 48px); }
+    .booking-mini-facts span { font-size: 10px; padding: 5px 10px; }
+    .gallery-slider { max-height: 360px; }
+    .gallery-arrow { width: 32px; height: 32px; font-size: 13px; }
+    .gallery-arrow.prev { left: 8px; }
+    .gallery-arrow.next { right: 8px; }
+    .fab { right: 14px; bottom: 14px; }
+    .fab-toggle { width: 50px; height: 50px; }
+    .fab-option { width: 40px; height: 40px; }
   }
 </style>
 </head>
@@ -300,7 +318,9 @@
 
 <nav>
   <div class="wrap nav-inner">
-    <a href="#" class="wordmark">ALLURING <span>Beauty Bar</span></a>
+    <a href="#" class="logo-link">
+      <img src="alluring.jpeg" alt="Alluring Beauty Bar" class="logo-img">
+    </a>
     <div class="nav-scrolled-links" id="navScrolledLinks">
       <a href="#services">Services</a>
       <a href="#book">Book</a>
@@ -410,7 +430,6 @@
           <span>Rustenburg studio</span>
         </div>
       </div>
-      <!-- Point this at your Fresha / Vagaro / Calendly booking link -->
       <a href="#" class="btn-book-external">Book an appointment →</a>
     </div>
   </div>
@@ -509,7 +528,7 @@
   });
   updateGallery();
 
-  // Nav dropdown — hamburger toggles the menu panel open/closed as part of the header
+  // Nav dropdown
   const navToggle = document.getElementById('navToggle');
   const navLinks = document.getElementById('navLinks');
   navToggle.addEventListener('click', () => {
@@ -525,7 +544,7 @@
     });
   });
 
-  // Contact FAB — expands into WhatsApp / email / phone
+  // Contact FAB
   const fabToggle = document.getElementById('fabToggle');
   const fabOptions = document.getElementById('fabOptions');
   fabToggle.addEventListener('click', () => {
@@ -534,7 +553,7 @@
     fabToggle.setAttribute('aria-expanded', String(isOpen));
   });
 
-  // Past the hero: header swaps its logo for section links, and the contact FAB appears
+  // Scroll: swap logo for links, show FAB
   const navEl = document.querySelector('nav');
   const fabEl = document.querySelector('.fab');
   const heroEl = document.querySelector('.hero');
