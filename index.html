@@ -20,7 +20,7 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
-    background: var(--blush);
+    background: var(--white);
     color: var(--text);
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 400;
@@ -40,11 +40,10 @@
     background: #FFFFFF;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--line);
     transition: background 0.25s ease;
   }
   .nav-inner { display: flex; align-items: center; justify-content: space-between; }
-  .logo-img { height: 60px; width: auto; display: block; transition: opacity 0.2s ease; }
+  .logo-img { height: 62px; width: auto; display: block; transition: opacity 0.2s ease; }
   .wordmark { display: none; }
 
   /* Links shown inline in place of the logo once you've scrolled past the hero (desktop only) */
@@ -92,7 +91,7 @@
   .nav-toggle.open span:nth-child(2) { transform: translateY(-4.25px) rotate(-45deg); background: var(--pink-deep); }
 
   /* ── HERO ── */
-  .hero { padding: 120px 0 56px; }
+  .hero { padding: 120px 0 56px; background: var(--white); }
   .hero-grid { display: flex; flex-direction: column; gap: 32px; width: 100%; }
   .hero h1 {
     font-family: 'Instrument Serif', serif; font-weight: 400;
@@ -123,6 +122,9 @@
 
   /* ── SECTIONS ── */
   .section { padding: 72px 0; }
+  #services { background: var(--blush); }
+  #book { background: var(--blush); }
+  #work { background: var(--blush); }
   .section-head {
     display: flex; justify-content: space-between; align-items: flex-end;
     margin-bottom: 36px; border-bottom: 1px solid var(--line); padding-bottom: 16px; gap: 16px;
@@ -229,7 +231,7 @@
   }
 
   /* ── FOOTER ── */
-  footer { padding: 64px 0 36px; border-top: 1px solid var(--line); margin-top: 24px; }
+  footer { padding: 64px 0 36px; border-top: 1px solid var(--line); margin-top: 24px; background: var(--blush); }
   .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 40px; margin-bottom: 44px; }
   footer h3 { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; font-size: 24px; margin-bottom: 10px; color: var(--ink); }
   footer p { color: var(--text-soft); font-size: 14px; line-height: 1.7; }
@@ -276,7 +278,7 @@
   @media (max-width: 768px) {
     .wrap { padding: 0 20px; }
     nav { padding: 12px 0; }
-    .logo-img { height: 48px; }
+    .logo-img { height: 50px; }
     .hero { padding: 100px 0 40px; }
     .nav-scrolled-links { gap: 14px; }
     .nav-scrolled-links a { font-size: 10.5px; }
@@ -292,13 +294,13 @@
   @media (max-width: 480px) {
     .wrap { padding: 0 16px; }
     nav { padding: 10px 0; }
-    .logo-img { height: 40px; }
+    .logo-img { height: 42px; }
     .hero { padding: 90px 0 32px; }
     .hero h1 { font-size: clamp(32px, 8vw, 48px); }
     .hero p { font-size: 14px; }
     .hero-cta { flex-direction: column; align-items: flex-start; gap: 12px; }
     .section { padding: 48px 0; }
-    .section-head { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .section-head { flex-direction: row; align-items: flex-end; gap: 8px; }
     .booking-mini { padding: 28px 20px; min-height: auto; }
     .booking-mini-title { font-size: clamp(32px, 8vw, 48px); }
     .booking-mini-facts span { font-size: 10px; padding: 5px 10px; }
