@@ -136,7 +136,7 @@
   .section { padding: 72px 0; }
   .section-head {
     display: flex; justify-content: space-between; align-items: flex-end;
-    margin-bottom: 36px; border-bottom: 1px solid var(--line); padding-bottom: 16px; gap: 16px;
+    margin-bottom: 36px; gap: 16px;
   }
   .section-head h2 {
     font-family: 'Instrument Serif', serif; font-weight: 400;
@@ -257,10 +257,6 @@
 
   /* ── FOOTER ── */
   footer { padding: 64px 0 36px; border-top: 1px solid var(--line); margin-top: 24px; }
-  .footer-line {
-    font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400;
-    font-size: clamp(28px, 4vw, 44px); color: var(--ink); margin-bottom: 48px; max-width: 640px;
-  }
   .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 40px; margin-bottom: 44px; }
   footer h3 { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; font-size: 24px; margin-bottom: 10px; color: var(--ink); }
   footer p { color: var(--text-soft); font-size: 14px; line-height: 1.7; }
@@ -269,39 +265,22 @@
   footer a.link-line:hover { border-color: var(--ink); }
   .foot-bottom { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px; font-size: 11px; color: var(--text-soft); font-family: 'Space Mono', monospace; }
 
-  /* ── CONTACT FAB ── */
+  /* ── CONTACT — WhatsApp only ── */
   .fab {
     position: fixed; right: 24px; bottom: 24px; z-index: 60;
-    display: flex; flex-direction: column; align-items: center; gap: 12px;
     opacity: 0; transform: translateY(14px); pointer-events: none;
     transition: opacity 0.3s ease, transform 0.3s ease;
   }
   .fab.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
-  .fab-options {
-    display: flex; flex-direction: column; align-items: center; gap: 12px;
-    max-height: 0; overflow: hidden; opacity: 0;
-    transition: max-height 0.32s ease, opacity 0.24s ease;
-  }
-  .fab-options.open { max-height: 260px; opacity: 1; }
-  .fab-option {
-    width: 46px; height: 46px; border-radius: 50%;
+  .fab-whatsapp {
+    width: 58px; height: 58px; border-radius: 50%;
     background: var(--pink-deep);
     display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 8px 18px -8px rgba(20,20,20,0.4);
+    box-shadow: 0 10px 24px -8px rgba(20,20,20,0.45);
     transition: background 0.2s ease, transform 0.2s ease;
   }
-  .fab-option:hover { background: var(--pink); transform: translateY(-2px); }
-  .fab-option svg { width: 20px; height: 20px; stroke: var(--ink); fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
-  .fab-toggle {
-    width: 58px; height: 58px; border-radius: 50%;
-    background: var(--pink-deep); border: none; cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 10px 24px -8px rgba(20,20,20,0.45);
-    transition: background 0.2s ease, transform 0.25s ease;
-  }
-  .fab-toggle:hover { background: var(--pink); }
-  .fab-toggle svg { width: 24px; height: 24px; stroke: var(--ink); fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.3s ease; }
-  .fab-toggle.open svg { transform: rotate(45deg); }
+  .fab-whatsapp:hover { background: var(--pink); transform: translateY(-2px); }
+  .fab-whatsapp svg { width: 26px; height: 26px; stroke: var(--ink); fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
@@ -337,8 +316,7 @@
     .gallery-arrow.prev { left: 8px; }
     .gallery-arrow.next { right: 8px; }
     .fab { right: 14px; bottom: 14px; }
-    .fab-toggle { width: 50px; height: 50px; }
-    .fab-option { width: 40px; height: 40px; }
+    .fab-whatsapp { width: 50px; height: 50px; }
   }
 </style>
 </head>
@@ -375,7 +353,6 @@
       <img src="FFAB30BB-FD6E-4EA3-B7B0-E166D663F767.png" alt="Alluring Beauty Bar manicure">
     </div>
     <div>
-      <div class="hero-eyebrow">Rustenburg · by appointment</div>
       <h1>Nails that <em>feel</em> like you.</h1>
       <p>I'm <strong>Irene</strong>. I take a few clients a week — gel, dip, and hand-painted sets — so every appointment gets my full attention.</p>
       <div class="hero-cta">
@@ -389,7 +366,6 @@
   <div class="wrap">
     <div class="section-head">
       <h2>Services</h2>
-      <div class="section-kicker">Gel · dip · sculpted · art</div>
     </div>
     <div class="menu-list">
       <div class="menu-row">
@@ -453,9 +429,9 @@
         <div class="booking-mini-title">Let's get you in.</div>
         <p class="booking-mini-text">I keep my calendar small so every client gets unhurried time — book a slot and I'll confirm within a few hours.</p>
         <div class="booking-mini-facts">
-          <span>Same-week slots</span>
-          <span>Card &amp; cash</span>
-          <span>Rustenburg studio</span>
+          <span>Deposit secures your slot</span>
+          <span>Free reschedule, 48hrs notice</span>
+          <span>Reminder sent the day before</span>
         </div>
       </div>
       <a href="#" class="btn-book-external">Book an appointment →</a>
@@ -490,7 +466,6 @@
 
 <footer id="visit">
   <div class="wrap">
-    <div class="footer-line">Book the chair, bring the vision — I'll handle the rest.</div>
     <div class="footer-grid">
       <div>
         <h3>Alluring Beauty Bar</h3>
@@ -515,20 +490,9 @@
 </footer>
 
 <div class="fab">
-  <div class="fab-options" id="fabOptions">
-    <a href="https://wa.me/27000000000" target="_blank" rel="noopener" class="fab-option" aria-label="Message on WhatsApp">
-      <svg viewBox="0 0 24 24"><path d="M4 20l1.3-4.1A7.9 7.9 0 1 1 8.9 19L4 20z"/><path d="M9 10c0 2.5 2.5 5 5 5" stroke-width="1.7"/></svg>
-    </a>
-    <a href="mailto:hello@alluringbeautybar.co.za" class="fab-option" aria-label="Email Irene">
-      <svg viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></svg>
-    </a>
-    <a href="tel:+27000000000" class="fab-option" aria-label="Call the studio">
-      <svg viewBox="0 0 24 24"><path d="M6 3.5c1 0 2.5 2.5 2.5 3.5S7 8.5 7 9.5c0 2 4.5 6.5 6.5 6.5 1 0 1.5-1.5 2.5-1.5s3.5 1.5 3.5 2.5-1.5 3-3 3C10.5 20 4 13.5 4 7.5c0-1.5 1-4 2-4z"/></svg>
-    </a>
-  </div>
-  <button class="fab-toggle" id="fabToggle" aria-label="Contact options" aria-expanded="false">
-    <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
-  </button>
+  <a href="https://wa.me/27000000000" target="_blank" rel="noopener" class="fab-whatsapp" aria-label="Message on WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M4 20l1.3-4.1A7.9 7.9 0 1 1 8.9 19L4 20z"/><path d="M9 10c0 2.5 2.5 5 5 5" stroke-width="1.7"/></svg>
+  </a>
 </div>
 
 <script>
@@ -578,16 +542,7 @@
     });
   });
 
-  // Contact FAB
-  const fabToggle = document.getElementById('fabToggle');
-  const fabOptions = document.getElementById('fabOptions');
-  fabToggle.addEventListener('click', () => {
-    const isOpen = fabOptions.classList.toggle('open');
-    fabToggle.classList.toggle('open', isOpen);
-    fabToggle.setAttribute('aria-expanded', String(isOpen));
-  });
-
-  // Scroll: swap logo for links, show FAB
+  // Scroll: swap logo for links, show WhatsApp button
   const navEl = document.querySelector('nav');
   const fabEl = document.querySelector('.fab');
   const heroEl = document.querySelector('.hero');
@@ -596,11 +551,6 @@
     const pastHero = heroEl.getBoundingClientRect().bottom <= navHeight;
     navEl.classList.toggle('scrolled', pastHero);
     fabEl.classList.toggle('visible', pastHero);
-    if (!pastHero) {
-      fabOptions.classList.remove('open');
-      fabToggle.classList.remove('open');
-      fabToggle.setAttribute('aria-expanded', 'false');
-    }
   }
   window.addEventListener('scroll', updateOnScroll, { passive: true });
   updateOnScroll();
