@@ -93,32 +93,44 @@
   /* ── HERO ── */
   .hero { padding: 120px 0 56px; }
   .hero-grid { display: flex; flex-direction: column; gap: 32px; width: 100%; }
+  .hero-eyebrow {
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--pink-deep); margin-bottom: 14px;
+  }
   .hero h1 {
     font-family: 'Instrument Serif', serif; font-weight: 400;
-    font-size: clamp(40px, 5.2vw, 68px); line-height: 1.02; letter-spacing: -0.01em; color: var(--ink);
+    font-size: clamp(44px, 6.4vw, 84px); line-height: 0.98; letter-spacing: -0.015em; color: var(--ink);
   }
-  .hero h1 em { font-style: italic; color: var(--pink-deep); }
-  .hero p { margin-top: 18px; max-width: 400px; font-size: 15px; line-height: 1.65; color: var(--text-soft); }
+  .hero h1 em { font-style: italic; color: var(--pink-deep); display: inline-block; transform: rotate(-2deg); }
+  .hero p { margin-top: 20px; max-width: 400px; font-size: 15px; line-height: 1.65; color: var(--text-soft); }
   .hero p strong { color: var(--ink); font-weight: 500; }
-  .hero-cta { margin-top: 26px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .hero-cta { margin-top: 28px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
   .btn-primary {
     display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px;
     background: var(--ink); color: var(--blush); border-radius: 999px; font-size: 14px;
     letter-spacing: 0.02em; transition: background 0.2s; border: none; cursor: pointer; white-space: nowrap;
   }
   .btn-primary:hover { background: #000; }
-  .btn-ghost {
-    font-size: 13px; letter-spacing: 0.03em; text-transform: uppercase; color: var(--text-soft);
-    border-bottom: 1px solid var(--line); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; white-space: nowrap;
-  }
-  .btn-ghost:hover { color: var(--ink); border-color: var(--ink); }
 
   .hero-image {
-    width: 100%; border-radius: 8px; overflow: hidden;
+    width: 100%; overflow: hidden; position: relative;
     background: linear-gradient(155deg, var(--pink-deep), var(--pink), var(--blush));
-    position: relative;
+    border-radius: 50% 50% 18px 18px / 22% 22% 6% 6%;
+    box-shadow: 0 1px 0 var(--line);
   }
   .hero-image img { width: 100%; height: auto; display: block; }
+  .hero-image::before {
+    content: ''; position: absolute; inset: -14px -14px auto -14px; height: 60%;
+    border: 1.5px solid var(--line); border-bottom: none;
+    border-radius: 50% 50% 0 0 / 30% 30% 0 0;
+    pointer-events: none; z-index: 1;
+  }
+
+  @media (min-width: 769px) {
+    .hero-grid { flex-direction: row; align-items: flex-end; gap: 0; }
+    .hero-image { width: 56%; flex-shrink: 0; }
+    .hero-grid > div:last-child { width: 48%; margin-left: -4%; margin-bottom: 40px; position: relative; z-index: 2; }
+  }
 
   /* ── SECTIONS ── */
   .section { padding: 72px 0; }
@@ -130,20 +142,20 @@
     font-family: 'Instrument Serif', serif; font-weight: 400;
     font-size: clamp(26px, 3.2vw, 40px); font-style: italic; color: var(--ink);
   }
-  .section-num { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--text-soft); letter-spacing: 0.06em; white-space: nowrap; }
+  .section-kicker { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--text-soft); letter-spacing: 0.06em; white-space: nowrap; }
 
   /* ── SERVICES ── */
   .menu-list { border-top: 1px solid var(--line); }
   .menu-row {
-    display: grid; grid-template-columns: 36px 1fr auto auto; align-items: center; gap: 20px;
-    padding: 20px 4px; border-bottom: 1px solid var(--line); transition: padding-left 0.25s, background 0.25s;
+    display: grid; grid-template-columns: 44px 1fr auto auto; align-items: center; gap: 20px;
+    padding: 22px 4px; border-bottom: 1px solid var(--line); transition: padding-left 0.25s, background 0.25s;
   }
   .menu-row:hover { padding-left: 12px; background: rgba(240,175,192,0.12); }
   .menu-row.active { padding-left: 12px; background: rgba(240,175,192,0.12); }
 
   .nail-icon {
-    width: 22px; height: 30px;
-    border-radius: 50% 50% 8px 8px / 62% 62% 12% 12%;
+    width: 26px; height: 36px;
+    border-radius: 50% 50% 16px 16px / 60% 60% 22% 22%;
     position: relative; flex-shrink: 0; overflow: hidden;
     box-shadow: 0 5px 10px -6px rgba(20,20,20,0.45);
     transition: transform 0.25s ease;
@@ -151,10 +163,24 @@
   .menu-row:hover .nail-icon { transform: translateY(-3px); }
   .menu-row.active .nail-icon { transform: translateY(-3px); }
   .nail-solid { background: var(--pink); }
-  .nail-french { background: linear-gradient(to bottom, #ffffff 0%, #ffffff 24%, var(--blush) 24%, var(--blush) 100%); border: 1px solid rgba(20,20,20,0.08); }
-  .nail-long { height: 34px; border-radius: 50% 50% 6px 6px / 68% 68% 10% 10%; border: 1.5px solid var(--ink); background: var(--white); }
-  .nail-dot { background-color: var(--pink-deep); background-image: radial-gradient(var(--ink) 1.6px, transparent 1.8px); background-size: 7px 7px; background-position: 2px 3px, 5px 8px; }
-  .nail-glass { background: linear-gradient(160deg, #ffffff, var(--blush) 70%); border: 1px solid rgba(20,20,20,0.08); }
+  .nail-french {
+    width: 30px; height: 32px; border-radius: 50% 50% 14px 14px / 66% 66% 20% 20%;
+    background: linear-gradient(to bottom, #ffffff 0%, #ffffff 26%, var(--blush) 26%, var(--blush) 100%);
+    border: 1px solid rgba(20,20,20,0.08);
+  }
+  .nail-long {
+    width: 24px; height: 46px; border-radius: 50% 50% 20px 20px / 54% 54% 18% 18%;
+    border: 1.5px solid var(--ink); background: var(--white);
+  }
+  .nail-dot {
+    width: 30px; height: 34px; border-radius: 50% 50% 15px 15px / 58% 58% 24% 24%;
+    background-color: var(--pink-deep); background-image: radial-gradient(var(--ink) 1.6px, transparent 1.8px);
+    background-size: 7px 7px; background-position: 2px 3px, 5px 8px;
+  }
+  .nail-glass {
+    width: 27px; height: 40px; border-radius: 50% 50% 17px 17px / 56% 56% 20% 20%;
+    background: linear-gradient(160deg, #ffffff, var(--blush) 70%); border: 1px solid rgba(20,20,20,0.08);
+  }
   .nail-glass::after { content: ''; position: absolute; top: 10%; left: 16%; width: 26%; height: 34%; background: rgba(255,255,255,0.9); border-radius: 50%; filter: blur(0.5px); }
 
   .service-name { font-family: 'Instrument Serif', serif; font-size: 21px; color: var(--ink); }
@@ -164,7 +190,7 @@
 
   /* ── BOOKING ── */
   .booking-mini {
-    background: var(--ink); color: var(--blush); border-radius: 16px;
+    background: var(--ink); color: var(--blush); border-radius: 20px 72px 20px 20px;
     padding: 56px 40px; min-height: 380px; display: flex; align-items: center; justify-content: space-between;
     gap: 26px; flex-wrap: wrap;
   }
@@ -186,7 +212,7 @@
     aspect-ratio: 4 / 5;
     max-height: 560px;
     margin: 0 auto;
-    border-radius: 10px;
+    border-radius: 50% 50% 20px 20px / 18% 18% 5% 5%;
     overflow: hidden;
   }
   .gallery-frame {
@@ -231,6 +257,10 @@
 
   /* ── FOOTER ── */
   footer { padding: 64px 0 36px; border-top: 1px solid var(--line); margin-top: 24px; }
+  .footer-line {
+    font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400;
+    font-size: clamp(28px, 4vw, 44px); color: var(--ink); margin-bottom: 48px; max-width: 640px;
+  }
   .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 40px; margin-bottom: 44px; }
   footer h3 { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; font-size: 24px; margin-bottom: 10px; color: var(--ink); }
   footer p { color: var(--text-soft); font-size: 14px; line-height: 1.7; }
@@ -345,6 +375,7 @@
       <img src="FFAB30BB-FD6E-4EA3-B7B0-E166D663F767.png" alt="Alluring Beauty Bar manicure">
     </div>
     <div>
+      <div class="hero-eyebrow">Rustenburg · by appointment</div>
       <h1>Nails that <em>feel</em> like you.</h1>
       <p>I'm <strong>Irene</strong>. I take a few clients a week — gel, dip, and hand-painted sets — so every appointment gets my full attention.</p>
       <div class="hero-cta">
@@ -358,7 +389,7 @@
   <div class="wrap">
     <div class="section-head">
       <h2>Services</h2>
-      <div class="section-num">01</div>
+      <div class="section-kicker">Gel · dip · sculpted · art</div>
     </div>
     <div class="menu-list">
       <div class="menu-row">
@@ -414,7 +445,7 @@
   <div class="wrap">
     <div class="section-head">
       <h2>Book a session</h2>
-      <div class="section-num">02</div>
+      <div class="section-kicker">Confirmed within hours</div>
     </div>
     <div class="booking-mini">
       <div>
@@ -436,7 +467,7 @@
   <div class="wrap">
     <div class="section-head">
       <h2>Recent work</h2>
-      <div class="section-num">03</div>
+      <div class="section-kicker">Fresh off the table</div>
     </div>
     <div class="gallery-slider">
       <div class="gallery-frame active"></div>
@@ -459,6 +490,7 @@
 
 <footer id="visit">
   <div class="wrap">
+    <div class="footer-line">Book the chair, bring the vision — I'll handle the rest.</div>
     <div class="footer-grid">
       <div>
         <h3>Alluring Beauty Bar</h3>
