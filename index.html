@@ -91,17 +91,13 @@
   .nav-toggle.open span:nth-child(2) { transform: translateY(-4.25px) rotate(-45deg); background: var(--pink-deep); }
 
   /* ── HERO ── */
-  .hero { padding: 120px 0 56px; }
-  .hero-grid { display: flex; flex-direction: column; gap: 32px; width: 100%; }
-  .hero-eyebrow {
-    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--pink-deep); margin-bottom: 14px;
-  }
+  .hero { padding: 120px 0 64px; }
+  .hero-grid { display: flex; flex-direction: column; gap: 36px; width: 100%; }
   .hero h1 {
     font-family: 'Instrument Serif', serif; font-weight: 400;
-    font-size: clamp(44px, 6.4vw, 84px); line-height: 0.98; letter-spacing: -0.015em; color: var(--ink);
+    font-size: clamp(44px, 5.6vw, 72px); line-height: 1.02; letter-spacing: -0.01em; color: var(--ink);
   }
-  .hero h1 em { font-style: italic; color: var(--pink-deep); display: inline-block; transform: rotate(-2deg); }
+  .hero h1 em { font-style: italic; color: var(--pink-deep); }
   .hero p { margin-top: 20px; max-width: 400px; font-size: 15px; line-height: 1.65; color: var(--text-soft); }
   .hero p strong { color: var(--ink); font-weight: 500; }
   .hero-cta { margin-top: 28px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
@@ -115,25 +111,18 @@
   .hero-image {
     width: 100%; overflow: hidden; position: relative;
     background: linear-gradient(155deg, var(--pink-deep), var(--pink), var(--blush));
-    border-radius: 50% 50% 18px 18px / 22% 22% 6% 6%;
-    box-shadow: 0 1px 0 var(--line);
+    border-radius: 16px;
   }
   .hero-image img { width: 100%; height: auto; display: block; }
-  .hero-image::before {
-    content: ''; position: absolute; inset: -14px -14px auto -14px; height: 60%;
-    border: 1.5px solid var(--line); border-bottom: none;
-    border-radius: 50% 50% 0 0 / 30% 30% 0 0;
-    pointer-events: none; z-index: 1;
-  }
 
   @media (min-width: 769px) {
-    .hero-grid { flex-direction: row; align-items: flex-end; gap: 0; }
-    .hero-image { width: 56%; flex-shrink: 0; }
-    .hero-grid > div:last-child { width: 48%; margin-left: -4%; margin-bottom: 40px; position: relative; z-index: 2; }
+    .hero-grid { flex-direction: row; align-items: center; gap: 56px; }
+    .hero-image { width: 52%; flex-shrink: 0; }
+    .hero-grid > div:last-child { width: 48%; }
   }
 
   /* ── SECTIONS ── */
-  .section { padding: 72px 0; }
+  .section { padding: 88px 0; }
   .section-head {
     display: flex; justify-content: space-between; align-items: flex-end;
     margin-bottom: 36px; gap: 16px;
@@ -142,12 +131,11 @@
     font-family: 'Instrument Serif', serif; font-weight: 400;
     font-size: clamp(26px, 3.2vw, 40px); font-style: italic; color: var(--ink);
   }
-  .section-kicker { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--text-soft); letter-spacing: 0.06em; white-space: nowrap; }
 
   /* ── SERVICES ── */
   .menu-list { border-top: 1px solid var(--line); }
   .menu-row {
-    display: grid; grid-template-columns: 44px 1fr auto auto; align-items: center; gap: 20px;
+    display: grid; grid-template-columns: 44px 1fr auto; align-items: center; gap: 20px;
     padding: 22px 4px; border-bottom: 1px solid var(--line); transition: padding-left 0.25s, background 0.25s;
   }
   .menu-row:hover { padding-left: 12px; background: rgba(240,175,192,0.12); }
@@ -157,7 +145,7 @@
     width: 26px; height: 36px;
     border-radius: 50% 50% 16px 16px / 60% 60% 22% 22%;
     position: relative; flex-shrink: 0; overflow: hidden;
-    box-shadow: 0 5px 10px -6px rgba(20,20,20,0.45);
+    box-shadow: 0 3px 6px -4px rgba(20,20,20,0.35);
     transition: transform 0.25s ease;
   }
   .menu-row:hover .nail-icon { transform: translateY(-3px); }
@@ -185,23 +173,19 @@
 
   .service-name { font-family: 'Instrument Serif', serif; font-size: 21px; color: var(--ink); }
   .service-desc { margin-top: 2px; font-size: 13px; color: var(--text-soft); max-width: 400px; }
-  .menu-time { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--text-soft); }
+  .menu-meta { text-align: right; }
   .menu-price { font-family: 'Space Mono', monospace; font-size: 14px; color: var(--ink); }
+  .menu-time { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--text-soft); margin-top: 3px; }
 
   /* ── BOOKING ── */
   .booking-mini {
-    background: var(--ink); color: var(--blush); border-radius: 20px 72px 20px 20px;
-    padding: 56px 40px; min-height: 380px; display: flex; align-items: center; justify-content: space-between;
+    background: var(--ink); color: var(--blush); border-radius: 20px;
+    padding: 56px 40px; min-height: 320px; display: flex; align-items: center; justify-content: space-between;
     gap: 26px; flex-wrap: wrap;
   }
-  .booking-eyebrow { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pink-deep); margin-bottom: 16px; }
-  .booking-mini-title { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(40px, 5.2vw, 68px); line-height: 1.02; letter-spacing: -0.01em; margin-bottom: 18px; color: var(--blush); }
+  .booking-mini-title { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(32px, 4.2vw, 52px); line-height: 1.05; letter-spacing: -0.01em; margin-bottom: 14px; color: var(--blush); }
   .booking-mini-text { font-size: 14px; color: rgba(250,232,237,0.65); max-width: 340px; }
-  .booking-mini-facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
-  .booking-mini-facts span {
-    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.03em; color: rgba(250,232,237,0.75);
-    border: 1px solid rgba(250,232,237,0.28); padding: 7px 14px; border-radius: 999px;
-  }
+  .booking-mini-facts { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.02em; color: rgba(250,232,237,0.5); margin-top: 22px; }
   .btn-book-external { flex-shrink: 0; padding: 15px 30px; background: var(--blush); color: var(--ink); border-radius: 999px; font-size: 14px; letter-spacing: 0.02em; transition: background 0.2s; white-space: nowrap; }
   .btn-book-external:hover { background: var(--pink); }
 
@@ -212,7 +196,7 @@
     aspect-ratio: 4 / 5;
     max-height: 560px;
     margin: 0 auto;
-    border-radius: 50% 50% 20px 20px / 18% 18% 5% 5%;
+    border-radius: 16px;
     overflow: hidden;
   }
   .gallery-frame {
@@ -229,11 +213,6 @@
   .gallery-frame:nth-child(6) { --g-a: var(--ink); --g-b: var(--pink); }
   .gallery-frame:nth-child(7) { --g-a: var(--pink-deep); --g-b: var(--ink); }
   .gallery-frame:nth-child(8) { --g-a: var(--pink); --g-b: #3a2c30; }
-  .gallery-count {
-    position: absolute; bottom: 14px; left: 14px; z-index: 2;
-    font-size: 11px; color: rgba(255,255,255,0.9);
-    background: rgba(20,20,20,0.35); padding: 5px 11px; border-radius: 999px; backdrop-filter: blur(6px);
-  }
   .gallery-arrow {
     position: absolute; top: 50%; transform: translateY(-50%); z-index: 2;
     width: 38px; height: 38px; border-radius: 50%;
@@ -291,8 +270,9 @@
     .nav-scrolled-links { gap: 14px; }
     .nav-scrolled-links a { font-size: 10.5px; }
     .section { padding: 56px 0; }
-    .menu-row { grid-template-columns: 30px 1fr; row-gap: 4px; }
-    .menu-time, .menu-price { grid-column: 2; justify-self: start; }
+    .menu-row { grid-template-columns: 30px 1fr; row-gap: 6px; }
+    .menu-meta { grid-column: 2; text-align: left; display: flex; gap: 10px; align-items: baseline; }
+    .menu-time { margin-top: 0; }
     .booking-mini { flex-direction: column; align-items: flex-start; padding: 32px 26px; }
     .gallery-slider { max-height: 480px; }
     .footer-grid { grid-template-columns: 1fr; }
@@ -310,7 +290,7 @@
     .section { padding: 48px 0; }
     .booking-mini { padding: 28px 20px; min-height: auto; }
     .booking-mini-title { font-size: clamp(32px, 8vw, 48px); }
-    .booking-mini-facts span { font-size: 10px; padding: 5px 10px; }
+    .booking-mini-facts { font-size: 10px; }
     .gallery-slider { max-height: 360px; }
     .gallery-arrow { width: 32px; height: 32px; font-size: 13px; }
     .gallery-arrow.prev { left: 8px; }
@@ -374,8 +354,10 @@
           <div class="service-name">Gel manicure</div>
           <div class="service-desc">Shape, cuticle care, two coats of gel, glass finish.</div>
         </div>
-        <div class="menu-time mono">45 min</div>
-        <div class="menu-price mono">R350</div>
+        <div class="menu-meta">
+          <div class="menu-price mono">R350</div>
+          <div class="menu-time mono">45 min</div>
+        </div>
       </div>
       <div class="menu-row">
         <div class="nail-icon nail-french"></div>
@@ -383,8 +365,10 @@
           <div class="service-name">Dip powder set</div>
           <div class="service-desc">Longer wear, natural finish, no UV lamp needed.</div>
         </div>
-        <div class="menu-time mono">60 min</div>
-        <div class="menu-price mono">R420</div>
+        <div class="menu-meta">
+          <div class="menu-price mono">R420</div>
+          <div class="menu-time mono">60 min</div>
+        </div>
       </div>
       <div class="menu-row">
         <div class="nail-icon nail-long"></div>
@@ -392,8 +376,10 @@
           <div class="service-name">Sculpted extensions</div>
           <div class="service-desc">Builder gel over tips — almond, square, or coffin shape.</div>
         </div>
-        <div class="menu-time mono">90 min</div>
-        <div class="menu-price mono">R650</div>
+        <div class="menu-meta">
+          <div class="menu-price mono">R650</div>
+          <div class="menu-time mono">90 min</div>
+        </div>
       </div>
       <div class="menu-row">
         <div class="nail-icon nail-dot"></div>
@@ -401,8 +387,10 @@
           <div class="service-name">Hand-painted art</div>
           <div class="service-desc">Custom design per set. Bring a reference or let me play.</div>
         </div>
-        <div class="menu-time mono">+20 min</div>
-        <div class="menu-price mono">from R80</div>
+        <div class="menu-meta">
+          <div class="menu-price mono">from R80</div>
+          <div class="menu-time mono">+20 min</div>
+        </div>
       </div>
       <div class="menu-row">
         <div class="nail-icon nail-glass"></div>
@@ -410,8 +398,10 @@
           <div class="service-name">Soak-off &amp; reset</div>
           <div class="service-desc">Safe removal, nail reset, cuticle oil. Come bare, leave fresh.</div>
         </div>
-        <div class="menu-time mono">20 min</div>
-        <div class="menu-price mono">R120</div>
+        <div class="menu-meta">
+          <div class="menu-price mono">R120</div>
+          <div class="menu-time mono">20 min</div>
+        </div>
       </div>
     </div>
   </div>
@@ -421,18 +411,12 @@
   <div class="wrap">
     <div class="section-head">
       <h2>Book a session</h2>
-      <div class="section-kicker">Confirmed within hours</div>
     </div>
     <div class="booking-mini">
       <div>
-        <div class="booking-eyebrow">Open for bookings</div>
         <div class="booking-mini-title">Let's get you in.</div>
         <p class="booking-mini-text">I keep my calendar small so every client gets unhurried time — book a slot and I'll confirm within a few hours.</p>
-        <div class="booking-mini-facts">
-          <span>Deposit secures your slot</span>
-          <span>Free reschedule, 48hrs notice</span>
-          <span>Reminder sent the day before</span>
-        </div>
+        <div class="booking-mini-facts">Deposit secures your slot · free reschedule up to 48hrs before</div>
       </div>
       <a href="#" class="btn-book-external">Book an appointment →</a>
     </div>
@@ -443,7 +427,6 @@
   <div class="wrap">
     <div class="section-head">
       <h2>Recent work</h2>
-      <div class="section-kicker">Fresh off the table</div>
     </div>
     <div class="gallery-slider">
       <div class="gallery-frame active"></div>
@@ -454,7 +437,6 @@
       <div class="gallery-frame"></div>
       <div class="gallery-frame"></div>
       <div class="gallery-frame"></div>
-      <div class="gallery-count mono">01 / 08</div>
       <button class="gallery-arrow prev" aria-label="Previous photo">←</button>
       <button class="gallery-arrow next" aria-label="Next photo">→</button>
     </div>
@@ -490,7 +472,7 @@
 </footer>
 
 <div class="fab">
-  <a href="https://wa.me/27827781234" target="_blank" rel="noopener" class="fab-whatsapp" aria-label="Message on WhatsApp">
+  <a href="https://wa.me/27000000000" target="_blank" rel="noopener" class="fab-whatsapp" aria-label="Message on WhatsApp">
     <svg viewBox="0 0 24 24"><path d="M4 20l1.3-4.1A7.9 7.9 0 1 1 8.9 19L4 20z"/><path d="M9 10c0 2.5 2.5 5 5 5" stroke-width="1.7"/></svg>
   </a>
 </div>
@@ -503,13 +485,11 @@
 
   // Gallery — one photo per slide
   const gFrames = document.querySelectorAll('.gallery-frame');
-  const gCount = document.querySelector('.gallery-count');
   const gProgress = document.getElementById('galleryProgress');
   const gProgressFill = document.getElementById('galleryProgressFill');
   let gIndex = 0;
   function updateGallery() {
     gFrames.forEach((f, i) => f.classList.toggle('active', i === gIndex));
-    gCount.textContent = String(gIndex + 1).padStart(2, '0') + ' / ' + String(gFrames.length).padStart(2, '0');
     gProgressFill.style.width = (((gIndex + 1) / gFrames.length) * 100) + '%';
   }
   document.querySelector('.gallery-arrow.prev').addEventListener('click', () => {
