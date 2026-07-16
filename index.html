@@ -88,7 +88,7 @@
   .nav-toggle.open span:nth-child(2) { transform: translateY(-4.25px) rotate(-45deg); background: var(--pink-deep); }
 
   /* ── HERO — full-bleed photo behind the header, headline overlaid on top ── */
-  .hero { position: relative; min-height: 74vh; overflow: hidden; }
+  .hero { position: relative; min-height: 92vh; overflow: hidden; }
   .hero-media { position: absolute; inset: 0; z-index: 0; }
   .hero-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .hero-media::after {
@@ -96,7 +96,7 @@
     background: linear-gradient(180deg, rgba(20,20,20,0.08) 0%, rgba(20,20,20,0.45) 65%, rgba(20,20,20,0.68) 100%);
   }
   .hero-content {
-    position: relative; z-index: 1; min-height: 75vh;
+    position: relative; z-index: 1; min-height: 92vh;
     display: flex; flex-direction: column; justify-content: flex-end; align-items: center;
     text-align: center; max-width: 640px; margin: 0 auto; padding: 108px 32px 56px;
   }
@@ -116,8 +116,8 @@
   .btn-primary:hover { background: #000; }
 
   @media (max-width: 768px) {
-    .hero { min-height: 58vh; }
-    .hero-content { min-height: 58vh; padding: 96px 24px 44px; }
+    .hero { min-height: 88vh; }
+    .hero-content { min-height: 88vh; padding: 96px 24px 44px; }
   }
 
   /* ── SECTIONS ── */
@@ -469,8 +469,9 @@
       </div>
       <div>
         <div class="foot-label">Hours</div>
-        <span class="link-line" style="border:none; display:block;">Tue – Sat, 9am – 6pm</span>
-        <span class="link-line" style="border:none; display:block;">Closed Sun – Mon</span>
+        <span class="link-line" style="border:none; display:block;">Mon – Fri, 3pm – 4pm</span>
+        <span class="link-line" style="border:none; display:block;">Sat, 8am – 3pm</span>
+        <span class="link-line" style="border:none; display:block;">Sun, 8am – 1pm</span>
       </div>
     </div>
     <div class="foot-bottom">
