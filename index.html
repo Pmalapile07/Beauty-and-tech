@@ -38,7 +38,6 @@
     position: fixed; top: 0; left: 0; right: 0; z-index: 50;
     padding: 16px 0;
     background: #FFFFFF;
-    box-shadow: 0 1px 0 var(--line);
   }
   .nav-inner { display: flex; align-items: center; justify-content: space-between; }
   .wordmark { font-family: 'Instrument Serif', serif; font-size: 21px; letter-spacing: 0.01em; color: var(--ink); }
@@ -89,7 +88,7 @@
   .nav-toggle.open span:nth-child(2) { transform: translateY(-4.25px) rotate(-45deg); background: var(--pink-deep); }
 
   /* ── HERO — full-bleed photo behind the header, headline overlaid on top ── */
-  .hero { position: relative; min-height: 68vh; overflow: hidden; }
+  .hero { position: relative; min-height: 74vh; overflow: hidden; }
   .hero-media { position: absolute; inset: 0; z-index: 0; }
   .hero-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .hero-media::after {
@@ -197,7 +196,7 @@
   .booking-mini-title { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(28px, 3.6vw, 40px); line-height: 1.1; letter-spacing: -0.01em; margin-bottom: 12px; color: var(--blush); }
   .booking-mini-copy { font-size: 14px; line-height: 1.6; color: rgba(250,232,237,0.65); max-width: 420px; }
   .booking-mini-action { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
-  .booking-mini-note { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.02em; color: rgba(250,232,237,0.5); }
+  .booking-mini-note { font-family: 'Space Mono', monospace; font-size: 11px; font-style: italic; letter-spacing: 0.02em; color: rgba(250,232,237,0.5); }
   .btn-book-external { flex-shrink: 0; padding: 15px 30px; background: var(--blush); color: var(--ink); border-radius: 999px; font-size: 14px; letter-spacing: 0.02em; transition: background 0.2s; white-space: nowrap; }
   .btn-book-external:hover { background: var(--pink); }
 
@@ -476,7 +475,7 @@
     </div>
     <div class="foot-bottom">
       <span>Alluring Beauty Bar</span>
-      <span>built by Pearl</span>
+      <span>builtbyPearl</span>
     </div>
   </div>
 </footer>
