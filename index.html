@@ -37,13 +37,16 @@
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 50;
     padding: 16px 0;
+    background: transparent;
+    transition: background 0.25s ease;
+  }
+  nav.scrolled {
     background: #FFFFFF;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    transition: background 0.25s ease;
   }
   .nav-inner { display: flex; align-items: center; justify-content: space-between; }
-  .logo-img { height: 60px; width: auto; display: block; transition: opacity 0.2s ease; }
+  .logo-img { height: 60px; width: auto; display: block; transition: opacity 0.2s ease; filter: brightness(0) invert(1) drop-shadow(0 1px 6px rgba(0,0,0,0.25)); }
   .wordmark { display: none; }
 
   /* Links shown inline in place of the logo once you've scrolled past the hero */
@@ -75,7 +78,7 @@
   .nav-links a:first-child { border-top: none; }
   .nav-links a:hover { color: var(--ink); background: rgba(240,175,192,0.12); }
 
-  /* Hamburger toggle */
+  /* Hamburger toggle — light lines, since it always sits over the hero photo */
   .nav-toggle {
     width: 32px; height: 24px;
     border: none; background: transparent; padding: 0;
@@ -83,24 +86,35 @@
     cursor: pointer; flex-shrink: 0;
   }
   .nav-toggle span {
-    display: block; width: 24px; height: 1.5px; background: var(--ink);
+    display: block; width: 24px; height: 1.5px; background: var(--blush);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25);
     transition: transform 0.28s ease, background 0.2s ease;
   }
   .nav-toggle:hover span { background: var(--pink-deep); }
   .nav-toggle.open span:nth-child(1) { transform: translateY(4.25px) rotate(45deg); background: var(--pink-deep); }
   .nav-toggle.open span:nth-child(2) { transform: translateY(-4.25px) rotate(-45deg); background: var(--pink-deep); }
 
-  /* ── HERO ── */
-  .hero { padding: 120px 0 64px; }
-  .hero-grid { display: flex; flex-direction: column; gap: 36px; width: 100%; }
+  /* ── HERO — full-bleed photo behind the header, headline overlaid on top ── */
+  .hero { position: relative; min-height: 92vh; overflow: hidden; }
+  .hero-media { position: absolute; inset: 0; z-index: 0; }
+  .hero-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-media::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(20,20,20,0.08) 0%, rgba(20,20,20,0.45) 65%, rgba(20,20,20,0.68) 100%);
+  }
+  .hero-content {
+    position: relative; z-index: 1; min-height: 92vh;
+    display: flex; flex-direction: column; justify-content: flex-end; align-items: center;
+    text-align: center; max-width: 640px; margin: 0 auto; padding: 140px 32px 72px;
+  }
   .hero h1 {
     font-family: 'Instrument Serif', serif; font-weight: 400;
-    font-size: clamp(44px, 5.6vw, 72px); line-height: 1.02; letter-spacing: -0.01em; color: var(--ink);
+    font-size: clamp(44px, 6vw, 72px); line-height: 1.02; letter-spacing: -0.01em; color: var(--blush);
   }
   .hero h1 em { font-style: italic; color: var(--pink-deep); }
-  .hero p { margin-top: 20px; max-width: 400px; font-size: 15px; line-height: 1.65; color: var(--text-soft); }
-  .hero p strong { color: var(--ink); font-weight: 500; }
-  .hero-cta { margin-top: 28px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .hero p { margin-top: 20px; max-width: 400px; font-size: 15px; line-height: 1.65; color: rgba(250,232,237,0.85); }
+  .hero p strong { color: var(--blush); font-weight: 500; }
+  .hero-cta { margin-top: 28px; display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
   .btn-primary {
     display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px;
     background: var(--ink); color: var(--blush); border-radius: 999px; font-size: 14px;
@@ -108,17 +122,9 @@
   }
   .btn-primary:hover { background: #000; }
 
-  .hero-image {
-    width: 100%; overflow: hidden; position: relative;
-    background: linear-gradient(155deg, var(--pink-deep), var(--pink), var(--blush));
-    border-radius: 16px;
-  }
-  .hero-image img { width: 100%; height: auto; display: block; }
-
-  @media (min-width: 769px) {
-    .hero-grid { flex-direction: row; align-items: center; gap: 56px; }
-    .hero-image { width: 52%; flex-shrink: 0; }
-    .hero-grid > div:last-child { width: 48%; }
+  @media (max-width: 768px) {
+    .hero { min-height: 82vh; }
+    .hero-content { min-height: 82vh; padding: 120px 24px 56px; }
   }
 
   /* ── SECTIONS ── */
@@ -328,16 +334,14 @@
 </nav>
 
 <section class="hero">
-  <div class="wrap hero-grid">
-    <div class="hero-image">
-      <img src="FFAB30BB-FD6E-4EA3-B7B0-E166D663F767.png" alt="Alluring Beauty Bar manicure">
-    </div>
-    <div>
-      <h1>Nails that <em>feel</em> like you.</h1>
-      <p>I'm <strong>Irene</strong>. I take a few clients a week — gel, dip, and hand-painted sets — so every appointment gets my full attention.</p>
-      <div class="hero-cta">
-        <a href="#book" class="btn-primary">Book an appointment</a>
-      </div>
+  <div class="hero-media">
+    <img src="FFAB30BB-FD6E-4EA3-B7B0-E166D663F767.png" alt="Alluring Beauty Bar manicure">
+  </div>
+  <div class="hero-content">
+    <h1>Nails that <em>feel</em> like you.</h1>
+    <p>I'm <strong>Irene</strong>. I take a few clients a week — gel, dip, and hand-painted sets — so every appointment gets my full attention.</p>
+    <div class="hero-cta">
+      <a href="#book" class="btn-primary">Book an appointment</a>
     </div>
   </div>
 </section>
