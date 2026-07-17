@@ -134,7 +134,7 @@
   /* ── SERVICES ── */
   .menu-list { border-top: 1px solid var(--line); }
   .menu-row {
-    display: grid; grid-template-columns: 44px 1fr auto; align-items: center; gap: 20px;
+    display: grid; grid-template-columns: 44px 1fr auto; align-items: flex-start; gap: 20px;
     padding: 22px 4px; border-bottom: 1px solid var(--line); transition: padding-left 0.25s, background 0.25s;
   }
   .menu-row:hover { padding-left: 12px; background: rgba(240,175,192,0.12); }
@@ -172,9 +172,17 @@
 
   .service-name { font-family: 'Instrument Serif', serif; font-size: 21px; color: var(--ink); }
   .service-desc { margin-top: 2px; font-size: 13px; color: var(--text-soft); max-width: 400px; }
-  .menu-meta { text-align: right; }
+  .menu-meta { text-align: right; padding-top: 3px; }
   .menu-price { font-family: 'Space Mono', monospace; font-size: 14px; color: var(--ink); }
   .menu-time { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--text-soft); margin-top: 3px; }
+  .menu-group-label {
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--pink-deep); margin: 40px 0 4px;
+  }
+  .menu-group-label:first-child { margin-top: 0; }
+  .menu-tiers { display: grid; grid-template-columns: repeat(2, auto); gap: 4px 20px; text-align: right; padding-top: 3px; }
+  .menu-tiers span { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--text-soft); white-space: nowrap; }
+  .menu-tiers span b { font-weight: 500; color: var(--ink); margin-left: 6px; }
 
   /* ── ABOUT ── */
   .about-grid { display: flex; flex-direction: column; gap: 32px; }
@@ -232,22 +240,44 @@
   footer a.link-line:hover { border-color: var(--ink); }
   .foot-bottom { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px; font-size: 11px; color: var(--text-soft); font-family: 'Space Mono', monospace; }
 
-  /* ── CONTACT — WhatsApp only ── */
+  /* ── CONTACT DRAWER — FAQ first, then WhatsApp/email/call ── */
   .fab {
     position: fixed; right: 24px; bottom: 24px; z-index: 60;
+    display: flex; flex-direction: column; align-items: flex-end; gap: 12px;
     opacity: 0; transform: translateY(14px); pointer-events: none;
     transition: opacity 0.3s ease, transform 0.3s ease;
   }
   .fab.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .fab-panel {
+    width: 280px; max-width: 78vw; background: var(--white); border: 1px solid var(--line); border-radius: 16px;
+    box-shadow: 0 20px 44px -14px rgba(20,20,20,0.3);
+    max-height: 0; opacity: 0; overflow: hidden;
+    transition: max-height 0.32s ease, opacity 0.24s ease;
+  }
+  .fab-panel.open { max-height: 460px; opacity: 1; }
+  .fab-panel-inner { padding: 20px; }
+  .fab-faq-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-soft); margin-bottom: 10px; }
+  .fab-faq-item { padding: 9px 0; border-top: 1px solid var(--line); }
+  .fab-faq-item:first-of-type { border-top: none; }
+  .fab-faq-q { font-family: 'Instrument Serif', serif; font-size: 15px; color: var(--ink); }
+  .fab-faq-a { font-size: 12px; line-height: 1.5; color: var(--text-soft); margin-top: 3px; }
+  .fab-contact-row { display: flex; gap: 8px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); }
+  .fab-contact-row a {
+    flex: 1; display: flex; align-items: center; justify-content: center; height: 42px;
+    border-radius: 999px; background: var(--blush); transition: background 0.2s ease;
+  }
+  .fab-contact-row a:hover { background: var(--pink); }
+  .fab-contact-row svg { width: 18px; height: 18px; stroke: var(--ink); fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
   .fab-whatsapp {
-    width: 58px; height: 58px; border-radius: 50%;
+    width: 58px; height: 58px; border-radius: 50%; border: none; cursor: pointer;
     background: var(--pink-deep);
     display: flex; align-items: center; justify-content: center;
     box-shadow: 0 10px 24px -8px rgba(20,20,20,0.45);
     transition: background 0.2s ease, transform 0.2s ease;
   }
   .fab-whatsapp:hover { background: var(--pink); transform: translateY(-2px); }
-  .fab-whatsapp svg { width: 26px; height: 26px; stroke: var(--ink); fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .fab-whatsapp svg { width: 26px; height: 26px; stroke: var(--ink); fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.25s ease; }
+  .fab-whatsapp.open svg { transform: rotate(90deg); }
 
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
@@ -258,6 +288,7 @@
     .section { padding: 56px 0; }
     .menu-row { grid-template-columns: 30px 1fr; row-gap: 6px; }
     .menu-meta { grid-column: 2; text-align: left; display: flex; gap: 10px; align-items: baseline; }
+    .menu-tiers { grid-column: 2; text-align: left; }
     .menu-time { margin-top: 0; }
     .footer-grid { grid-template-columns: 1fr; }
     .fab { right: 18px; bottom: 18px; }
@@ -338,60 +369,73 @@
     <div class="section-head">
       <h2>Services</h2>
     </div>
+    <div class="menu-group-label">Acrylic</div>
     <div class="menu-list">
-      <div class="menu-row">
-        <div class="nail-icon nail-solid"></div>
-        <div class="menu-text">
-          <div class="service-name">Gel manicure</div>
-          <div class="service-desc">Shape, cuticle care, two coats of gel, glass finish.</div>
-        </div>
-        <div class="menu-meta">
-          <div class="menu-price mono">R350</div>
-          <div class="menu-time mono">45 min</div>
-        </div>
-      </div>
-      <div class="menu-row">
-        <div class="nail-icon nail-french"></div>
-        <div class="menu-text">
-          <div class="service-name">Dip powder set</div>
-          <div class="service-desc">Longer wear, natural finish, no UV lamp needed.</div>
-        </div>
-        <div class="menu-meta">
-          <div class="menu-price mono">R420</div>
-          <div class="menu-time mono">60 min</div>
-        </div>
-      </div>
       <div class="menu-row">
         <div class="nail-icon nail-long"></div>
         <div class="menu-text">
-          <div class="service-name">Sculpted extensions</div>
-          <div class="service-desc">Builder gel over tips — almond, square, or coffin shape.</div>
+          <div class="service-name">Plain acrylic</div>
+          <div class="service-desc">Full acrylic set, priced by length.</div>
         </div>
-        <div class="menu-meta">
-          <div class="menu-price mono">R650</div>
-          <div class="menu-time mono">90 min</div>
+        <div class="menu-tiers">
+          <span>Short <b>R180</b></span>
+          <span>Medium <b>R200</b></span>
+          <span>Long <b>R250</b></span>
+          <span>X-long <b>R300</b></span>
         </div>
       </div>
       <div class="menu-row">
         <div class="nail-icon nail-dot"></div>
         <div class="menu-text">
-          <div class="service-name">Hand-painted art</div>
-          <div class="service-desc">Custom design per set. Bring a reference or let me play.</div>
+          <div class="service-name">Nail art</div>
+          <div class="service-desc">Design, per nail.</div>
         </div>
         <div class="menu-meta">
-          <div class="menu-price mono">from R80</div>
-          <div class="menu-time mono">+20 min</div>
+          <div class="menu-price mono">R5</div>
         </div>
       </div>
       <div class="menu-row">
         <div class="nail-icon nail-glass"></div>
         <div class="menu-text">
-          <div class="service-name">Soak-off &amp; reset</div>
-          <div class="service-desc">Safe removal, nail reset, cuticle oil. Come bare, leave fresh.</div>
+          <div class="service-name">Soak-off</div>
+          <div class="service-desc">Safe removal, nails left clean and ready.</div>
+        </div>
+        <div class="menu-meta">
+          <div class="menu-price mono">R50</div>
+        </div>
+      </div>
+      <div class="menu-row">
+        <div class="nail-icon nail-solid"></div>
+        <div class="menu-text">
+          <div class="service-name">Pedicure</div>
+          <div class="service-desc">Soak, shape, and polish for acrylic sets.</div>
         </div>
         <div class="menu-meta">
           <div class="menu-price mono">R120</div>
-          <div class="menu-time mono">20 min</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-group-label">Gel</div>
+    <div class="menu-list">
+      <div class="menu-row">
+        <div class="nail-icon nail-french"></div>
+        <div class="menu-text">
+          <div class="service-name">Overlay</div>
+          <div class="service-desc">Gel over your natural nail, no extensions.</div>
+        </div>
+        <div class="menu-meta">
+          <div class="menu-price mono">R180</div>
+        </div>
+      </div>
+      <div class="menu-row">
+        <div class="nail-icon nail-glass"></div>
+        <div class="menu-text">
+          <div class="service-name">Pedicure</div>
+          <div class="service-desc">Soak, shape, and polish with gel finish.</div>
+        </div>
+        <div class="menu-meta">
+          <div class="menu-price mono">R100</div>
         </div>
       </div>
     </div>
@@ -469,9 +513,9 @@
       </div>
       <div>
         <div class="foot-label">Hours</div>
-        <span class="link-line" style="border:none; display:block;">Mon – Fri, 3pm – 4pm</span>
-        <span class="link-line" style="border:none; display:block;">Sat, 8am – 3pm</span>
-        <span class="link-line" style="border:none; display:block;">Sun, 8am – 1pm</span>
+        <span class="link-line" style="border:none; display:block;">Mon – Fri, 15:00 – 16:00</span>
+        <span class="link-line" style="border:none; display:block;">Sat, 08:00 – 15:00</span>
+        <span class="link-line" style="border:none; display:block;">Sun, 08:00 – 13:00</span>
       </div>
     </div>
     <div class="foot-bottom">
@@ -482,9 +526,37 @@
 </footer>
 
 <div class="fab">
-  <a href="https://wa.me/27000000000" target="_blank" rel="noopener" class="fab-whatsapp" aria-label="Message on WhatsApp">
+  <div class="fab-panel" id="fabPanel">
+    <div class="fab-panel-inner">
+      <div class="fab-faq-label">Quick answers</div>
+      <div class="fab-faq-item">
+        <div class="fab-faq-q">How do I book?</div>
+        <div class="fab-faq-a">Tap "Book an appointment" above, or message us below.</div>
+      </div>
+      <div class="fab-faq-item">
+        <div class="fab-faq-q">Do you take walk-ins?</div>
+        <div class="fab-faq-a">By appointment only — a few slots run each day.</div>
+      </div>
+      <div class="fab-faq-item">
+        <div class="fab-faq-q">Can I reschedule?</div>
+        <div class="fab-faq-a">Yes, free of charge up to 48 hours before your slot.</div>
+      </div>
+      <div class="fab-contact-row">
+        <a href="https://wa.me/27000000000" target="_blank" rel="noopener" aria-label="Message on WhatsApp">
+          <svg viewBox="0 0 24 24"><path d="M4 20l1.3-4.1A7.9 7.9 0 1 1 8.9 19L4 20z"/><path d="M9 10c0 2.5 2.5 5 5 5" stroke-width="1.7"/></svg>
+        </a>
+        <a href="mailto:hello@alluringbeautybar.co.za" aria-label="Email Irene">
+          <svg viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></svg>
+        </a>
+        <a href="tel:+27000000000" aria-label="Call the studio">
+          <svg viewBox="0 0 24 24"><path d="M6 3.5c1 0 2.5 2.5 2.5 3.5S7 8.5 7 9.5c0 2 4.5 6.5 6.5 6.5 1 0 1.5-1.5 2.5-1.5s3.5 1.5 3.5 2.5-1.5 3-3 3C10.5 20 4 13.5 4 7.5c0-1.5 1-4 2-4z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+  <button class="fab-whatsapp" id="fabToggle" aria-label="Contact options" aria-expanded="false">
     <svg viewBox="0 0 24 24"><path d="M4 20l1.3-4.1A7.9 7.9 0 1 1 8.9 19L4 20z"/><path d="M9 10c0 2.5 2.5 5 5 5" stroke-width="1.7"/></svg>
-  </a>
+  </button>
 </div>
 
 <script>
@@ -509,7 +581,16 @@
     });
   });
 
-  // Scroll: swap logo for links, show WhatsApp button
+  // Contact drawer — FAQ first, then WhatsApp/email/call
+  const fabToggle = document.getElementById('fabToggle');
+  const fabPanel = document.getElementById('fabPanel');
+  fabToggle.addEventListener('click', () => {
+    const isOpen = fabPanel.classList.toggle('open');
+    fabToggle.classList.toggle('open', isOpen);
+    fabToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  // Scroll: swap logo for links, show contact button
   const navEl = document.querySelector('nav');
   const fabEl = document.querySelector('.fab');
   const heroEl = document.querySelector('.hero');
@@ -518,6 +599,11 @@
     const pastHero = heroEl.getBoundingClientRect().bottom <= navHeight;
     navEl.classList.toggle('scrolled', pastHero);
     fabEl.classList.toggle('visible', pastHero);
+    if (!pastHero) {
+      fabPanel.classList.remove('open');
+      fabToggle.classList.remove('open');
+      fabToggle.setAttribute('aria-expanded', 'false');
+    }
   }
   window.addEventListener('scroll', updateOnScroll, { passive: true });
   updateOnScroll();
