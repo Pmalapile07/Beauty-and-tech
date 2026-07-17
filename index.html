@@ -180,9 +180,18 @@
     color: var(--pink-deep); margin: 40px 0 4px;
   }
   .menu-group-label:first-child { margin-top: 0; }
-  .menu-tiers { display: grid; grid-template-columns: repeat(2, auto); gap: 4px 20px; text-align: right; padding-top: 3px; }
+  .menu-tiers { display: grid; grid-template-columns: repeat(2, auto); gap: 4px 20px; text-align: right; }
   .menu-tiers span { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--text-soft); white-space: nowrap; }
   .menu-tiers span b { font-weight: 500; color: var(--ink); margin-left: 6px; }
+  .menu-expand-toggle {
+    display: flex; align-items: center; gap: 6px; background: none; border: none; cursor: pointer;
+    font-family: 'Space Mono', monospace; font-size: 12px; color: var(--ink); padding: 3px 0;
+  }
+  .menu-expand-toggle svg { width: 12px; height: 12px; stroke: var(--text-soft); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.25s ease; }
+  .menu-expand-toggle.open svg { transform: rotate(180deg); }
+  .menu-tiers-panel { grid-column: 1 / -1; max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+  .menu-tiers-panel.open { max-height: 120px; }
+  .menu-tiers-panel .menu-tiers { padding-top: 10px; justify-content: flex-end; }
 
   /* ── ABOUT ── */
   .about-grid { display: flex; flex-direction: column; gap: 32px; }
@@ -340,7 +349,7 @@
   </div>
   <div class="hero-content">
     <h1>Nails that <em>feel</em> like you.</h1>
-    <p>I'm <strong>Irene</strong>. I take a few clients a week — gel, dip, and hand-painted sets — so every appointment gets my full attention.</p>
+    <p>I'm <strong>Irene</strong>, your nail girl in Rustenburg. I keep it to a few clients a week — gel, dip, and hand-painted sets — so you always get my full attention, not just a rushed set.</p>
     <div class="hero-cta">
       <a href="#book" class="btn-primary">Book an appointment</a>
     </div>
@@ -357,8 +366,8 @@
         <img src="FFAB30BB-FD6E-4EA3-B7B0-E166D663F767.png" alt="Irene at work">
       </div>
       <div class="about-text">
-        <p>Alluring Beauty Bar is a one-chair studio in Rustenburg, run by Irene. No big team, no rushed slots — just one client at a time, given the kind of attention a proper set deserves.</p>
-        <p>Every service is done by hand, from shaping to finish, with tools sanitized between every single client.</p>
+        <p>Alluring Beauty Bar is a one-chair studio in Rustenburg, run solo by Irene — no big team, no rushed slots, just you in the chair getting the attention a proper set deserves.</p>
+        <p>Every set is done by hand, start to finish, with freshly sanitized tools for every single client.</p>
       </div>
     </div>
   </div>
@@ -375,20 +384,26 @@
         <div class="nail-icon nail-long"></div>
         <div class="menu-text">
           <div class="service-name">Plain acrylic</div>
-          <div class="service-desc">Full acrylic set, priced by length.</div>
+          <div class="service-desc">Your classic full set — pick a length, we'll do the rest.</div>
         </div>
-        <div class="menu-tiers">
-          <span>Short <b>R180</b></span>
-          <span>Medium <b>R200</b></span>
-          <span>Long <b>R250</b></span>
-          <span>X-long <b>R300</b></span>
+        <button class="menu-expand-toggle" id="acrylicToggle" aria-expanded="false">
+          <span>From R180</span>
+          <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="menu-tiers-panel" id="acrylicPanel">
+          <div class="menu-tiers">
+            <span>Short <b>R180</b></span>
+            <span>Medium <b>R200</b></span>
+            <span>Long <b>R250</b></span>
+            <span>X-long <b>R300</b></span>
+          </div>
         </div>
       </div>
       <div class="menu-row">
         <div class="nail-icon nail-dot"></div>
         <div class="menu-text">
           <div class="service-name">Nail art</div>
-          <div class="service-desc">Design, per nail.</div>
+          <div class="service-desc">Custom design, added per nail.</div>
         </div>
         <div class="menu-meta">
           <div class="menu-price mono">R5</div>
@@ -398,7 +413,7 @@
         <div class="nail-icon nail-glass"></div>
         <div class="menu-text">
           <div class="service-name">Soak-off</div>
-          <div class="service-desc">Safe removal, nails left clean and ready.</div>
+          <div class="service-desc">Gentle removal — nails left happy and ready for their next look.</div>
         </div>
         <div class="menu-meta">
           <div class="menu-price mono">R50</div>
@@ -408,7 +423,7 @@
         <div class="nail-icon nail-solid"></div>
         <div class="menu-text">
           <div class="service-name">Pedicure</div>
-          <div class="service-desc">Soak, shape, and polish for acrylic sets.</div>
+          <div class="service-desc">Soak, shape, and polish — pampered toes to match your set.</div>
         </div>
         <div class="menu-meta">
           <div class="menu-price mono">R120</div>
@@ -422,7 +437,7 @@
         <div class="nail-icon nail-french"></div>
         <div class="menu-text">
           <div class="service-name">Overlay</div>
-          <div class="service-desc">Gel over your natural nail, no extensions.</div>
+          <div class="service-desc">Gel over your natural nail — strong and glossy, no extensions needed.</div>
         </div>
         <div class="menu-meta">
           <div class="menu-price mono">R180</div>
@@ -432,7 +447,7 @@
         <div class="nail-icon nail-glass"></div>
         <div class="menu-text">
           <div class="service-name">Pedicure</div>
-          <div class="service-desc">Soak, shape, and polish with gel finish.</div>
+          <div class="service-desc">Soak, shape, and a gel finish that lasts.</div>
         </div>
         <div class="menu-meta">
           <div class="menu-price mono">R100</div>
@@ -449,12 +464,12 @@
     </div>
     <div class="booking-mini">
       <div class="booking-mini-text">
-        <div class="booking-mini-title">Reserve your appointment</div>
-        <p class="booking-mini-copy">I keep my calendar small so every client gets unhurried time. Appointments are usually confirmed within a few hours of booking.</p>
+        <div class="booking-mini-title">Let's get you booked in</div>
+        <p class="booking-mini-copy">I keep my calendar small so every client gets proper, unhurried time — appointments are usually confirmed within a few hours, so you're never left wondering.</p>
       </div>
       <div class="booking-mini-action">
         <a href="#" class="btn-book-external">Book an appointment →</a>
-        <div class="booking-mini-note">A deposit secures your slot · free reschedule up to 48 hours before</div>
+        <div class="booking-mini-note">A small deposit locks in your spot · free reschedule up to 48 hours before</div>
       </div>
     </div>
   </div>
@@ -504,7 +519,7 @@
     <div class="footer-grid">
       <div>
         <h3>Alluring Beauty Bar</h3>
-        <p>A quiet studio in Rustenburg. One client at a time, no rush.</p>
+        <p>A quiet studio in Rustenburg — one client at a time, and never any rush.</p>
       </div>
       <div>
         <div class="foot-label">Connect</div>
@@ -531,15 +546,15 @@
       <div class="fab-faq-label">Quick answers</div>
       <div class="fab-faq-item">
         <div class="fab-faq-q">How do I book?</div>
-        <div class="fab-faq-a">Tap "Book an appointment" above, or message us below.</div>
+        <div class="fab-faq-a">Easiest way — tap "Book an appointment" above, or just message us below.</div>
       </div>
       <div class="fab-faq-item">
         <div class="fab-faq-q">Do you take walk-ins?</div>
-        <div class="fab-faq-a">By appointment only — a few slots run each day.</div>
+        <div class="fab-faq-a">By appointment only — just a few slots a day so everyone gets proper time.</div>
       </div>
       <div class="fab-faq-item">
         <div class="fab-faq-q">Can I reschedule?</div>
-        <div class="fab-faq-a">Yes, free of charge up to 48 hours before your slot.</div>
+        <div class="fab-faq-a">Life happens — free reschedule up to 48 hours before your slot.</div>
       </div>
       <div class="fab-contact-row">
         <a href="https://wa.me/27000000000" target="_blank" rel="noopener" aria-label="Message on WhatsApp">
@@ -563,6 +578,15 @@
   // Service rows — tap toggles the same highlight the hover state gives on desktop
   document.querySelectorAll('.menu-row').forEach(row => {
     row.addEventListener('click', () => row.classList.toggle('active'));
+  });
+
+  // Plain acrylic — tap to reveal the length-based pricing
+  const acrylicToggle = document.getElementById('acrylicToggle');
+  const acrylicPanel = document.getElementById('acrylicPanel');
+  acrylicToggle.addEventListener('click', () => {
+    const isOpen = acrylicPanel.classList.toggle('open');
+    acrylicToggle.classList.toggle('open', isOpen);
+    acrylicToggle.setAttribute('aria-expanded', String(isOpen));
   });
 
   // Nav dropdown
