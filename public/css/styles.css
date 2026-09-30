@@ -290,6 +290,9 @@ footer a.link-line:hover { border-color: var(--ink); }
   .menu-row { grid-template-columns: 30px 1fr; row-gap: 6px; }
   .menu-meta { grid-column: 2; text-align: left; display: flex; gap: 10px; align-items: baseline; }
   .menu-tiers { grid-column: 2; text-align: left; }
+  .menu-expand-toggle { grid-column: 2; justify-self: start; }
+  .menu-tiers-panel { grid-column: 2; }
+  .menu-tiers-panel .menu-tiers { justify-content: start; }
   .menu-time { margin-top: 0; }
   .footer-grid { grid-template-columns: 1fr; }
   .fab { right: 18px; bottom: 18px; }
