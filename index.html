@@ -7,6 +7,38 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500&family=Space+Mono&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<style>
+.hero-media {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.hero-media::-webkit-scrollbar {
+  display: none;
+}
+
+.hero-media img {
+  flex: 0 0 100%;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  scroll-snap-align: start;
+}
+
+@media (min-width: 768px) {
+  .hero-media {
+    overflow-x: visible;
+    scroll-snap-type: none;
+  }
+
+  .hero-media img {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+}
+</style>
 </head>
 <body>
 
@@ -37,7 +69,8 @@
 
 <section class="hero">
   <div class="hero-media">
-    <img src="FFAB30BB-FD6E-4EA3-B7B0-E166D663F767.png" alt="Alluring Beauty Bar manicure">
+    <img src="nails-4.5.png" alt="Alluring Beauty Bar manicure">
+    <img src="toes-home.png" alt="Alluring Beauty Bar pedicure">
   </div>
   <div class="hero-content">
     <h1>Nails that <em>feel</em> like you.</h1>
