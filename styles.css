@@ -238,7 +238,6 @@ footer p { color: var(--text-soft); font-size: 14px; line-height: 1.7; }
 .foot-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-soft); margin-bottom: 12px; }
 footer a.link-line { display: block; font-size: 14px; padding: 5px 0; border-bottom: 1px solid transparent; transition: border-color 0.2s; color: var(--text); }
 footer a.link-line:hover { border-color: var(--ink); }
-.hours-line { display: block; font-size: 14px; padding: 5px 0; color: var(--text); }
 .foot-bottom { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px; font-size: 11px; color: var(--text-soft); font-family: 'Space Mono', monospace; }
 
 /* ── CONTACT DRAWER — FAQ first, then WhatsApp/email/call ── */
