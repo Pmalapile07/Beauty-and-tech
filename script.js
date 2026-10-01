@@ -1,56 +1,52 @@
-// Service rows — tap toggles the same highlight the hover state gives on desktop
-document.querySelectorAll('.menu-row').forEach(row => {
-  row.addEventListener('click', () => row.classList.toggle('active'));
-});
+// ---- header menu toggle ----
+  const menuBtn = document.getElementById('menu-btn');
+  const menuPanel = document.getElementById('menu-panel');
 
-// Plain acrylic — tap to reveal the length-based pricing
-const acrylicToggle = document.getElementById('acrylicToggle');
-const acrylicPanel = document.getElementById('acrylicPanel');
-acrylicToggle.addEventListener('click', () => {
-  const isOpen = acrylicPanel.classList.toggle('open');
-  acrylicToggle.classList.toggle('open', isOpen);
-  acrylicToggle.setAttribute('aria-expanded', String(isOpen));
-});
-
-// Nav dropdown
-const navToggle = document.getElementById('navToggle');
-const navLinks = document.getElementById('navLinks');
-navToggle.addEventListener('click', () => {
-  const isOpen = navLinks.classList.toggle('open');
-  navToggle.classList.toggle('open', isOpen);
-  navToggle.setAttribute('aria-expanded', String(isOpen));
-});
-navLinks.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    navLinks.classList.remove('open');
-    navToggle.classList.remove('open');
-    navToggle.setAttribute('aria-expanded', 'false');
+  menuBtn.addEventListener('click', () => {
+    const open = menuPanel.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open);
+    menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
   });
-});
 
-// Contact drawer — FAQ first, then WhatsApp/email/call
-const fabToggle = document.getElementById('fabToggle');
-const fabPanel = document.getElementById('fabPanel');
-fabToggle.addEventListener('click', () => {
-  const isOpen = fabPanel.classList.toggle('open');
-  fabToggle.classList.toggle('open', isOpen);
-  fabToggle.setAttribute('aria-expanded', String(isOpen));
-});
+  menuPanel.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      menuPanel.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
 
-// Scroll: swap logo for links, show contact button
-const navEl = document.querySelector('nav');
-const fabEl = document.querySelector('.fab');
-const heroEl = document.querySelector('.hero');
-function updateOnScroll() {
-  const navHeight = navEl.offsetHeight;
-  const pastHero = heroEl.getBoundingClientRect().bottom <= navHeight;
-  navEl.classList.toggle('scrolled', pastHero);
-  fabEl.classList.toggle('visible', pastHero);
-  if (!pastHero) {
-    fabPanel.classList.remove('open');
-    fabToggle.classList.remove('open');
-    fabToggle.setAttribute('aria-expanded', 'false');
-  }
-}
-window.addEventListener('scroll', updateOnScroll, { passive: true });
-updateOnScroll();
+  // ---- design-inspo upload preview ----
+  const inspoInput = document.getElementById('inspo');
+  const preview = document.getElementById('inspo-preview');
+  const uploadBox = document.getElementById('upload-box');
+  const uploadLabel = document.getElementById('upload-label');
+
+  inspoInput.addEventListener('change', () => {
+    const file = inspoInput.files[0];
+    if (!file) return;
+    uploadBox.classList.add('has-file');
+    uploadLabel.textContent = file.name;
+    const reader = new FileReader();
+    reader.onload = e => {
+      preview.src = e.target.result;
+      preview.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+  });
+
+  // ---- booking form (front-end only, no backend wired up yet) ----
+  const form = document.getElementById('booking-form');
+  const msg = document.getElementById('form-msg');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    // TODO: once the admin panel exists, POST this data there instead
+    // of just showing a confirmation message.
+    msg.classList.add('show');
+    form.querySelector('button[type="submit"]').textContent = 'Request sent';
+    form.querySelector('button[type="submit"]').disabled = true;
+  });
