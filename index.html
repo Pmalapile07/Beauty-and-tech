@@ -3,29 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alluring Beauty Bar</title>
+<title>Alluring Beauty Bar · Nails in Rustenburg</title>
+<meta name="description" content="Alluring Beauty Bar — a one-chair nail studio in Rustenburg. Acrylic, gel and pedicures by appointment.">
+<link rel="icon" type="image/png" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500&family=Space+Mono&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <style>
-/* Hero: two 4:5 images. Mobile = scroll-snap slider, desktop (769px+) = side by side.
-   Overrides styles.css, where .hero-media sat absolutely behind the text and
-   .hero-media img had height: 100% (which cancels aspect-ratio). */
-.hero { min-height: 0; }
-.hero::after {
-  content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
-  background: linear-gradient(180deg, rgba(20,20,20,0.08) 0%, rgba(20,20,20,0.45) 65%, rgba(20,20,20,0.68) 100%);
-}
+/* Hero: two 4:5 images. Mobile = scroll-snap slider with text below,
+   desktop (769px+) = side by side with text over a gradient. */
+.hero { position: relative; margin-top: var(--nav-h); background: var(--ink); }
 .hero-media {
   position: relative;
-  inset: auto;
   display: flex;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
 }
 .hero-media::-webkit-scrollbar { display: none; }
-.hero-media::after { display: none; }
 .hero-media img {
   flex: 0 0 100%;
   width: 100%;
@@ -34,11 +30,17 @@
   object-fit: cover;
   scroll-snap-align: start;
 }
-.hero-content {
-  position: absolute; inset: 0; min-height: 0;
-  pointer-events: none;
+.hero-content { background: var(--paper); color: var(--ink); padding: 40px 0 56px; }
+.hero h1 {
+  font-family: var(--display); font-weight: 400;
+  font-size: clamp(40px, 6vw, 76px); line-height: 1.02; letter-spacing: -0.015em;
 }
-.hero-content a { pointer-events: auto; }
+.hero h1 em { font-style: italic; }
+.hero p { margin-top: 20px; max-width: 440px; font-size: 16px; line-height: 1.7; color: var(--muted); }
+.hero-cta { margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap; }
+@media (max-width: 480px) {
+  .hero-cta .btn { flex: 1 1 100%; }
+}
 
 @media (min-width: 769px) {
   .hero-media {
@@ -49,6 +51,24 @@
     flex: 1 1 0;
     min-width: 0;
   }
+  .hero::after {
+    content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 35%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.78) 100%);
+  }
+  .hero-content {
+    position: absolute; inset: 0; z-index: 1;
+    display: flex; align-items: flex-end;
+    background: none; color: var(--paper); padding: 0 0 72px;
+    pointer-events: none;
+  }
+  .hero-content .wrap { width: 100%; }
+  .hero-content a { pointer-events: auto; }
+  .hero .eyebrow { color: rgba(255,255,255,0.8); }
+  .hero p { color: rgba(255,255,255,0.82); }
+  .hero-btn-main { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+  .hero-btn-main:hover { background: transparent; color: var(--paper); }
+  .hero-btn-alt { color: var(--paper); border-color: rgba(255,255,255,0.7); }
+  .hero-btn-alt:hover { background: var(--paper); color: var(--ink); border-color: var(--paper); }
 }
 </style>
 </head>
@@ -56,24 +76,31 @@
 
 <nav>
   <div class="wrap nav-inner">
-    <a href="#" class="wordmark">Alluring <span>Beauty Bar</span></a>
-    <div class="nav-scrolled-links" id="navScrolledLinks">
+    <a href="#" class="logo" aria-label="Alluring Beauty Bar, back to top">
+      <img src="logo.png" alt="Alluring Beauty Bar" width="800" height="219">
+    </a>
+    <div class="nav-desktop">
       <a href="#services">Services</a>
-      <a href="#book">Book</a>
       <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#reviews">Reviews</a>
       <a href="#visit">Visit</a>
+      <a href="#book" class="btn btn-dark">Book now</a>
     </div>
-    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
-      <span></span><span></span>
-    </button>
+    <div class="nav-mobile">
+      <a href="#book" class="btn btn-dark">Book</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span>
+      </button>
+    </div>
   </div>
   <div class="nav-links" id="navLinks">
     <div class="wrap nav-links-inner">
-      <a href="#about">About</a>
       <a href="#services">Services</a>
-      <a href="#work">Work</a>
-      <a href="#reviews">Reviews</a>
       <a href="#book">Book</a>
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#reviews">Reviews</a>
       <a href="#visit">Visit</a>
     </div>
   </div>
@@ -85,129 +112,124 @@
     <img src="toes-home" alt="Alluring Beauty Bar pedicure">
   </div>
   <div class="hero-content">
-    <h1>Nails that <em>feel</em> like you.</h1>
-    <p>I'm <strong>Irene</strong>, your nail girl in Rustenburg. I keep it to a few clients a week — gel, dip, and hand-painted sets — so you always get my full attention, not just a rushed set.</p>
-    <div class="hero-cta">
-      <a href="#book" class="btn-primary">Book an appointment</a>
+    <div class="wrap">
+      <div class="eyebrow">Nail studio · Rustenburg</div>
+      <h1>Nails that <em>feel</em><br>like you.</h1>
+      <p>I'm Irene, your nail girl in Rustenburg. I keep it to a few clients a week — gel, dip, and hand-painted sets — so you always get my full attention, not just a rushed set.</p>
+      <div class="hero-cta">
+        <a href="#book" class="btn btn-dark hero-btn-main">Book an appointment</a>
+        <a href="#services" class="btn btn-outline hero-btn-alt">View services</a>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="section" id="about">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>About</h2>
-    </div>
-    <div class="about-grid">
-      <div class="about-photo">
-        <img src="FFAB30BB-FD6E-4EA3-B7B0-E166D663F767.png" alt="Irene at work">
-      </div>
-      <div class="about-text">
-        <p>Alluring Beauty Bar is a one-chair studio in Rustenburg, run solo by Irene — no big team, no rushed slots, just you in the chair getting the attention a proper set deserves.</p>
-        <p>Every set is done by hand, start to finish, with freshly sanitized tools for every single client.</p>
-      </div>
-    </div>
+<div class="strip">
+  <div class="wrap strip-inner">
+    <span>By appointment only</span>
+    <span>One client at a time</span>
+    <span>Sanitized tools, every set</span>
   </div>
-</section>
+</div>
 
 <section class="section" id="services">
   <div class="wrap">
     <div class="section-head">
-      <h2>Services</h2>
+      <div class="eyebrow">The menu</div>
+      <h2>Services &amp; <em>pricing</em></h2>
     </div>
-    <div class="menu-group-label">Acrylic</div>
-    <div class="menu-list">
-      <div class="menu-row">
-        <div class="nail-icon nail-long"></div>
-        <div class="menu-text">
+    <div class="menu-grid">
+      <div class="menu-group">
+        <div class="menu-group-label">Acrylic</div>
+        <div class="menu-row">
           <div class="service-name">Plain acrylic</div>
+          <button class="menu-expand-toggle" id="acrylicToggle" aria-expanded="false" aria-controls="acrylicPanel">
+            <span>From R180</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
           <div class="service-desc">Your classic full set — pick a length, we'll do the rest.</div>
-        </div>
-        <button class="menu-expand-toggle" id="acrylicToggle" aria-expanded="false">
-          <span>From R180</span>
-          <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
-        </button>
-        <div class="menu-tiers-panel" id="acrylicPanel">
-          <div class="menu-tiers">
-            <span>Short <b>R180</b></span>
-            <span>Medium <b>R200</b></span>
-            <span>Long <b>R250</b></span>
-            <span>X-long <b>R300</b></span>
+          <div class="menu-tiers-panel" id="acrylicPanel">
+            <div class="menu-tiers">
+              <span>Short <b>R180</b></span>
+              <span>Medium <b>R200</b></span>
+              <span>Long <b>R250</b></span>
+              <span>X-long <b>R300</b></span>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="menu-row">
-        <div class="nail-icon nail-dot"></div>
-        <div class="menu-text">
+        <div class="menu-row">
           <div class="service-name">Nail art</div>
+          <div class="menu-price">R5 <small>/ nail</small></div>
           <div class="service-desc">Custom design, added per nail.</div>
         </div>
-        <div class="menu-meta">
-          <div class="menu-price mono">R5</div>
-        </div>
-      </div>
-      <div class="menu-row">
-        <div class="nail-icon nail-glass"></div>
-        <div class="menu-text">
+        <div class="menu-row">
           <div class="service-name">Soak-off</div>
+          <div class="menu-price">R50</div>
           <div class="service-desc">Gentle removal — nails left happy and ready for their next look.</div>
         </div>
-        <div class="menu-meta">
-          <div class="menu-price mono">R50</div>
-        </div>
-      </div>
-      <div class="menu-row">
-        <div class="nail-icon nail-solid"></div>
-        <div class="menu-text">
+        <div class="menu-row">
           <div class="service-name">Pedicure</div>
+          <div class="menu-price">R120</div>
           <div class="service-desc">Soak, shape, and polish — pampered toes to match your set.</div>
         </div>
-        <div class="menu-meta">
-          <div class="menu-price mono">R120</div>
+      </div>
+
+      <div class="menu-group">
+        <div class="menu-group-label">Gel</div>
+        <div class="menu-row">
+          <div class="service-name">Overlay</div>
+          <div class="menu-price">R180</div>
+          <div class="service-desc">Gel over your natural nail — strong and glossy, no extensions needed.</div>
+        </div>
+        <div class="menu-row">
+          <div class="service-name">Pedicure</div>
+          <div class="menu-price">R100</div>
+          <div class="service-desc">Soak, shape, and a gel finish that lasts.</div>
         </div>
       </div>
     </div>
-
-    <div class="menu-group-label">Gel</div>
-    <div class="menu-list">
-      <div class="menu-row">
-        <div class="nail-icon nail-french"></div>
-        <div class="menu-text">
-          <div class="service-name">Overlay</div>
-          <div class="service-desc">Gel over your natural nail — strong and glossy, no extensions needed.</div>
-        </div>
-        <div class="menu-meta">
-          <div class="menu-price mono">R180</div>
-        </div>
-      </div>
-      <div class="menu-row">
-        <div class="nail-icon nail-glass"></div>
-        <div class="menu-text">
-          <div class="service-name">Pedicure</div>
-          <div class="service-desc">Soak, shape, and a gel finish that lasts.</div>
-        </div>
-        <div class="menu-meta">
-          <div class="menu-price mono">R100</div>
-        </div>
-      </div>
+    <div class="menu-cta">
+      <a href="#book" class="btn btn-dark">Book your set</a>
+      <p>Not sure what to choose? Message Irene and she'll help you pick.</p>
     </div>
   </div>
 </section>
 
-<section class="section" id="book">
+<section class="section booking" id="book">
   <div class="wrap">
-    <div class="section-head">
-      <h2>Book a session</h2>
+    <div class="booking-head">
+      <div>
+        <div class="eyebrow">Booking</div>
+        <h2>Let's get you <em>booked in</em></h2>
+      </div>
+      <p>I keep my calendar small so every client gets proper, unhurried time — appointments are usually confirmed within a few hours, so you're never left wondering.</p>
     </div>
-    <div class="booking-mini">
-      <div class="booking-mini-text">
-        <div class="booking-mini-title">Let's get you booked in</div>
-        <p class="booking-mini-copy">I keep my calendar small so every client gets proper, unhurried time — appointments are usually confirmed within a few hours, so you're never left wondering.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div>
+          <h3>Pick your service</h3>
+          <p>Browse the menu and choose your set, length and any nail art.</p>
+        </div>
       </div>
-      <div class="booking-mini-action">
-        <a href="#" class="btn-book-external">Book an appointment →</a>
-        <div class="booking-mini-note">A small deposit locks in your spot · free reschedule up to 48 hours before</div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div>
+          <h3>Request a time</h3>
+          <p>Send your preferred day and time — you'll hear back within a few hours.</p>
+        </div>
       </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div>
+          <h3>Lock it in</h3>
+          <p>A small deposit secures your spot. Free reschedule up to 48 hours before.</p>
+        </div>
+      </div>
+    </div>
+    <div class="booking-action">
+      <a href="#" class="btn btn-light">Book an appointment</a>
+      <div class="booking-note">A small deposit locks in your spot · free reschedule up to 48 hours before</div>
     </div>
   </div>
 </section>
@@ -215,13 +237,29 @@
 <section class="section" id="work">
   <div class="wrap">
     <div class="section-head">
-      <h2>Recent work</h2>
+      <div class="eyebrow">Portfolio</div>
+      <h2>Recent <em>work</em></h2>
     </div>
+    <!-- Swap each placeholder for a photo: <div class="gallery-item"><img src="your-photo" alt="Describe the set" loading="lazy"></div> -->
     <div class="gallery-grid">
-      <div class="gallery-item"></div>
-      <div class="gallery-item"></div>
-      <div class="gallery-item"></div>
-      <div class="gallery-item"></div>
+      <div class="gallery-item gallery-empty"><span>Coming soon</span></div>
+      <div class="gallery-item gallery-empty"><span>Coming soon</span></div>
+      <div class="gallery-item gallery-empty"><span>Coming soon</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-bone" id="about">
+  <div class="wrap about-grid">
+    <div class="about-photo">
+      <img src="nails-home" alt="Irene at work" loading="lazy">
+    </div>
+    <div class="about-text">
+      <div class="eyebrow">The studio</div>
+      <h2>One chair. <em>Your</em> time.</h2>
+      <p>Alluring Beauty Bar is a one-chair studio in Rustenburg, run solo by Irene — no big team, no rushed slots, just you in the chair getting the attention a proper set deserves.</p>
+      <p>Every set is done by hand, start to finish, with freshly sanitized tools for every single client.</p>
+      <div class="about-sign">— Irene</div>
     </div>
   </div>
 </section>
@@ -229,21 +267,22 @@
 <section class="section" id="reviews">
   <div class="wrap">
     <div class="section-head">
+      <div class="eyebrow">Kind words</div>
       <h2>Reviews</h2>
     </div>
     <div class="reviews-grid">
       <div class="review-card">
-        <div class="review-stars">★★★★★</div>
+        <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
         <p class="review-quote">Every visit feels unhurried — like no one else exists but you.</p>
         <div class="review-name">Naledi K.</div>
       </div>
       <div class="review-card">
-        <div class="review-stars">★★★★★</div>
+        <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
         <p class="review-quote">My gel lasted three full weeks without a single chip.</p>
         <div class="review-name">Boitumelo S.</div>
       </div>
       <div class="review-card">
-        <div class="review-stars">★★★★★</div>
+        <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
         <p class="review-quote">Booked last minute and she still made time. Kindness in every detail.</p>
         <div class="review-name">Refilwe M.</div>
       </div>
@@ -255,23 +294,24 @@
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <h3>Alluring Beauty Bar</h3>
+        <img src="logo-white.png" alt="Alluring Beauty Bar" class="footer-logo" width="800" height="219">
         <p>A quiet studio in Rustenburg — one client at a time, and never any rush.</p>
       </div>
       <div>
         <div class="foot-label">Connect</div>
-        <a href="#" class="link-line">Instagram</a>
-        <a href="#" class="link-line">Email Irene</a>
+        <a href="#" class="foot-line">Instagram</a>
+        <a href="mailto:hello@alluringbeautybar.co.za" class="foot-line">Email Irene</a>
+        <a href="#book" class="foot-line">Book an appointment</a>
       </div>
       <div>
         <div class="foot-label">Hours</div>
-        <span class="link-line" style="border:none; display:block;">Mon – Fri, 15:00 – 16:00</span>
-        <span class="link-line" style="border:none; display:block;">Sat, 08:00 – 15:00</span>
-        <span class="link-line" style="border:none; display:block;">Sun, 08:00 – 13:00</span>
+        <span class="foot-line">Mon – Fri, 15:00 – 16:00</span>
+        <span class="foot-line">Sat, 08:00 – 15:00</span>
+        <span class="foot-line">Sun, 08:00 – 13:00</span>
       </div>
     </div>
     <div class="foot-bottom">
-      <span>Alluring Beauty Bar</span>
+      <span>© Alluring Beauty Bar</span>
       <span>builtbyPearl</span>
     </div>
   </div>
@@ -283,7 +323,7 @@
       <div class="fab-faq-label">Quick answers</div>
       <div class="fab-faq-item">
         <div class="fab-faq-q">How do I book?</div>
-        <div class="fab-faq-a">Easiest way — tap "Book an appointment" above, or just message us below.</div>
+        <div class="fab-faq-a">Easiest way — tap "Book an appointment" above, or just message me below.</div>
       </div>
       <div class="fab-faq-item">
         <div class="fab-faq-q">Do you take walk-ins?</div>
@@ -294,8 +334,8 @@
         <div class="fab-faq-a">Life happens — free reschedule up to 48 hours before your slot.</div>
       </div>
       <div class="fab-contact-row">
-        <a href="https://wa.me/27000000000" target="_blank" rel="noopener" aria-label="Message on WhatsApp">
-          <svg viewBox="0 0 24 24"><path d="M4 20l1.3-4.1A7.9 7.9 0 1 1 8.9 19L4 20z"/><path d="M9 10c0 2.5 2.5 5 5 5" stroke-width="1.7"/></svg>
+        <a href="https://wa.me/27000000000" target="_blank" rel="noopener noreferrer" aria-label="Message on WhatsApp">
+          <svg viewBox="0 0 24 24"><path d="M4 20l1.3-4.1A7.9 7.9 0 1 1 8.9 19L4 20z"/><path d="M9 10c0 2.5 2.5 5 5 5"/></svg>
         </a>
         <a href="mailto:hello@alluringbeautybar.co.za" aria-label="Email Irene">
           <svg viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></svg>
@@ -306,8 +346,8 @@
       </div>
     </div>
   </div>
-  <button class="fab-whatsapp" id="fabToggle" aria-label="Contact options" aria-expanded="false">
-    <svg viewBox="0 0 24 24"><path d="M4 20l1.3-4.1A7.9 7.9 0 1 1 8.9 19L4 20z"/><path d="M9 10c0 2.5 2.5 5 5 5" stroke-width="1.7"/></svg>
+  <button class="fab-toggle" id="fabToggle" aria-label="Contact options" aria-expanded="false" aria-controls="fabPanel">
+    <svg viewBox="0 0 24 24"><path d="M4 20l1.3-4.1A7.9 7.9 0 1 1 8.9 19L4 20z"/><path d="M9 10c0 2.5 2.5 5 5 5"/></svg>
   </button>
 </div>
 
