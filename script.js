@@ -1,3 +1,8 @@
+// Service rows — tap toggles the same highlight the hover state gives on desktop
+document.querySelectorAll('.menu-row').forEach(row => {
+  row.addEventListener('click', () => row.classList.toggle('active'));
+});
+
 // Plain acrylic — tap to reveal the length-based pricing
 const acrylicToggle = document.getElementById('acrylicToggle');
 const acrylicPanel = document.getElementById('acrylicPanel');
@@ -7,40 +12,45 @@ acrylicToggle.addEventListener('click', () => {
   acrylicToggle.setAttribute('aria-expanded', String(isOpen));
 });
 
-// Mobile nav dropdown
+// Nav dropdown
 const navToggle = document.getElementById('navToggle');
 const navLinks = document.getElementById('navLinks');
-function setNav(open) {
-  navLinks.classList.toggle('open', open);
-  navToggle.classList.toggle('open', open);
-  navToggle.setAttribute('aria-expanded', String(open));
-  navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-}
-navToggle.addEventListener('click', () => setNav(!navLinks.classList.contains('open')));
-navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setNav(false)));
+navToggle.addEventListener('click', () => {
+  const isOpen = navLinks.classList.toggle('open');
+  navToggle.classList.toggle('open', isOpen);
+  navToggle.setAttribute('aria-expanded', String(isOpen));
+});
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    navToggle.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  });
+});
 
 // Contact drawer — FAQ first, then WhatsApp/email/call
 const fabToggle = document.getElementById('fabToggle');
 const fabPanel = document.getElementById('fabPanel');
-function setFab(open) {
-  fabPanel.classList.toggle('open', open);
-  fabToggle.classList.toggle('open', open);
-  fabToggle.setAttribute('aria-expanded', String(open));
-}
-fabToggle.addEventListener('click', () => setFab(!fabPanel.classList.contains('open')));
-
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') { setNav(false); setFab(false); }
+fabToggle.addEventListener('click', () => {
+  const isOpen = fabPanel.classList.toggle('open');
+  fabToggle.classList.toggle('open', isOpen);
+  fabToggle.setAttribute('aria-expanded', String(isOpen));
 });
 
-// Show the contact button once you've scrolled past the hero
+// Scroll: swap logo for links, show contact button
 const navEl = document.querySelector('nav');
 const fabEl = document.querySelector('.fab');
 const heroEl = document.querySelector('.hero');
 function updateOnScroll() {
-  const pastHero = heroEl.getBoundingClientRect().bottom <= navEl.offsetHeight;
+  const navHeight = navEl.offsetHeight;
+  const pastHero = heroEl.getBoundingClientRect().bottom <= navHeight;
+  navEl.classList.toggle('scrolled', pastHero);
   fabEl.classList.toggle('visible', pastHero);
-  if (!pastHero) setFab(false);
+  if (!pastHero) {
+    fabPanel.classList.remove('open');
+    fabToggle.classList.remove('open');
+    fabToggle.setAttribute('aria-expanded', 'false');
+  }
 }
 window.addEventListener('scroll', updateOnScroll, { passive: true });
 updateOnScroll();
