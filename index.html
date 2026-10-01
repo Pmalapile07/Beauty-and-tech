@@ -6,11 +6,388 @@
 <title>Alluring Beauty Bar</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500&family=Space+Mono&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
 <style>
-/* Hero: two 4:5 images. Mobile = scroll-snap slider, desktop (769px+) = side by side.
-   Overrides styles.css, where .hero-media sat absolutely behind the text and
-   .hero-media img had height: 100% (which cancels aspect-ratio). */
+:root {
+  --blush: #FAE8ED;
+  --pink: #FDD5DF;
+  --pink-deep: #F0AFC0;
+  --ink: #141414;
+  --white: #FFFFFF;
+  --line: rgba(20,20,20,0.12);
+  --text: #1c1a1a;
+  --text-soft: rgba(28,26,26,0.6);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--blush);
+  color: var(--text);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--ink); color: var(--blush); }
+.serif { font-family: 'Instrument Serif', serif; }
+.mono { font-family: 'Space Mono', monospace; }
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.wrap { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  padding: 16px 0;
+  background: #FFFFFF;
+}
+.nav-inner { display: flex; align-items: center; justify-content: space-between; }
+.wordmark { font-family: 'Instrument Serif', serif; font-size: 21px; letter-spacing: 0.01em; color: var(--ink); }
+.wordmark span { font-style: italic; color: var(--pink-deep); }
+
+/* Links shown inline in place of the logo once you've scrolled past the hero */
+.nav-scrolled-links { display: none; align-items: center; gap: 28px; }
+.nav-scrolled-links a {
+  font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-soft);
+  transition: color 0.2s ease; white-space: nowrap;
+}
+.nav-scrolled-links a:hover { color: var(--ink); }
+nav.scrolled .wordmark { display: none; }
+nav.scrolled .nav-toggle { display: none; }
+nav.scrolled .nav-scrolled-links { display: flex; }
+
+/* Nav dropdown panel — hangs as part of the header, off-canvas until opened */
+.nav-links {
+  position: absolute; top: 100%; left: 0; right: 0;
+  background: #FFFFFF;
+  border-bottom: 2px solid var(--pink-deep);
+  max-height: 0; overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.32s ease, opacity 0.24s ease;
+}
+.nav-links.open { max-height: 360px; opacity: 1; }
+.nav-links-inner { display: flex; flex-direction: column; }
+.nav-links a {
+  font-size: 13px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-soft);
+  padding: 16px 0; border-top: 1px solid var(--line); transition: color 0.2s, background 0.2s;
+}
+.nav-links a:first-child { border-top: none; }
+.nav-links a:hover { color: var(--ink); background: rgba(240,175,192,0.12); }
+
+/* Hamburger toggle — both lines identical width/height */
+.nav-toggle {
+  width: 32px; height: 24px;
+  border: none; background: transparent; padding: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 7px;
+  cursor: pointer; flex-shrink: 0;
+}
+.nav-toggle span {
+  display: block; width: 24px; height: 1.5px; background: var(--ink);
+  transition: transform 0.28s ease, background 0.2s ease;
+}
+.nav-toggle:hover span { background: var(--pink-deep); }
+.nav-toggle.open span:nth-child(1) { transform: translateY(4.25px) rotate(45deg); background: var(--pink-deep); }
+.nav-toggle.open span:nth-child(2) { transform: translateY(-4.25px) rotate(-45deg); background: var(--pink-deep); }
+
+/* ── HERO — full-bleed photo behind the header, headline overlaid on top ── */
+.hero { position: relative; min-height: 92vh; overflow: hidden; }
+.hero-media { position: absolute; inset: 0; z-index: 0; }
+.hero-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero-media::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(20,20,20,0.08) 0%, rgba(20,20,20,0.45) 65%, rgba(20,20,20,0.68) 100%);
+}
+.hero-content {
+  position: relative; z-index: 1; min-height: 92vh;
+  display: flex; flex-direction: column; justify-content: flex-end; align-items: center;
+  text-align: center; max-width: 640px; margin: 0 auto; padding: 108px 32px 56px;
+}
+.hero h1 {
+  font-family: 'Instrument Serif', serif; font-weight: 400;
+  font-size: clamp(48px, 7.4vw, 104px); line-height: 0.95; letter-spacing: -0.02em; color: var(--blush);
+  max-width: 11ch;
+}
+.hero h1 em { font-style: italic; color: var(--pink-deep); }
+.hero p { margin-top: 18px; max-width: 400px; font-size: 15px; line-height: 1.65; color: rgba(250,232,237,0.85); }
+.hero p strong { color: var(--blush); font-weight: 500; }
+.hero-cta { margin-top: 28px; display: flex; align-items: center; justify-content: flex-start; gap: 16px; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px;
+  background: var(--ink); color: var(--blush); border-radius: 999px; font-size: 14px;
+  letter-spacing: 0.02em; transition: background 0.2s; border: none; cursor: pointer; white-space: nowrap;
+}
+.btn-primary:hover { background: #000; }
+
+@media (max-width: 768px) {
+  .hero { min-height: 88vh; }
+  .hero-content { min-height: 88vh; padding: 96px 24px 44px; }
+}
+
+/* ── SECTIONS ── */
+.section { padding: 88px 0; }
+.section-head {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 40px; gap: 16px;
+  padding-bottom: 18px; border-bottom: 1px solid var(--line);
+}
+.section-head h2 {
+  font-family: 'Instrument Serif', serif; font-weight: 400;
+  font-size: clamp(36px, 4.8vw, 60px); line-height: 1; font-style: italic; color: var(--ink);
+}
+
+/* ── SERVICES ── */
+.menu-list { border-top: 1px solid var(--line); }
+.menu-row {
+  display: grid; grid-template-columns: 44px 1fr auto; align-items: flex-start; gap: 20px;
+  padding: 22px 4px; border-bottom: 1px solid var(--line); transition: padding-left 0.25s, background 0.25s;
+}
+.menu-row:hover { padding-left: 12px; background: rgba(240,175,192,0.12); }
+.menu-row.active { padding-left: 12px; background: rgba(240,175,192,0.12); }
+
+.nail-icon {
+  width: 26px; height: 36px;
+  border-radius: 50% 50% 16px 16px / 60% 60% 22% 22%;
+  position: relative; flex-shrink: 0; overflow: hidden;
+  box-shadow: 0 3px 6px -4px rgba(20,20,20,0.35);
+  transition: transform 0.25s ease;
+}
+.menu-row:hover .nail-icon { transform: translateY(-3px); }
+.menu-row.active .nail-icon { transform: translateY(-3px); }
+.nail-solid { background: var(--pink); }
+.nail-french {
+  width: 30px; height: 32px; border-radius: 50% 50% 14px 14px / 66% 66% 20% 20%;
+  background: linear-gradient(to bottom, #ffffff 0%, #ffffff 26%, var(--blush) 26%, var(--blush) 100%);
+  border: 1px solid rgba(20,20,20,0.08);
+}
+.nail-long {
+  width: 24px; height: 46px; border-radius: 50% 50% 20px 20px / 54% 54% 18% 18%;
+  border: 1.5px solid var(--ink); background: var(--white);
+}
+.nail-dot {
+  width: 30px; height: 34px; border-radius: 50% 50% 15px 15px / 58% 58% 24% 24%;
+  background-color: var(--pink-deep); background-image: radial-gradient(var(--ink) 1.6px, transparent 1.8px);
+  background-size: 7px 7px; background-position: 2px 3px, 5px 8px;
+}
+.nail-glass {
+  width: 27px; height: 40px; border-radius: 50% 50% 17px 17px / 56% 56% 20% 20%;
+  background: linear-gradient(160deg, #ffffff, var(--blush) 70%); border: 1px solid rgba(20,20,20,0.08);
+}
+.nail-glass::after { content: ''; position: absolute; top: 10%; left: 16%; width: 26%; height: 34%; background: rgba(255,255,255,0.9); border-radius: 50%; filter: blur(0.5px); }
+
+.service-name { font-family: 'Instrument Serif', serif; font-size: 21px; color: var(--ink); }
+.service-desc { margin-top: 2px; font-size: 13px; color: var(--text-soft); max-width: 400px; }
+.menu-meta { text-align: right; padding-top: 3px; }
+.menu-price { font-family: 'Space Mono', monospace; font-size: 14px; color: var(--ink); }
+.menu-time { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--text-soft); margin-top: 3px; }
+.menu-group-label {
+  font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--pink-deep); margin: 40px 0 4px;
+}
+.menu-group-label:first-child { margin-top: 0; }
+.menu-groups { display: grid; gap: 40px; }
+.menu-group .menu-group-label { margin-bottom: 12px; }
+@media (min-width: 900px) {
+  .menu-groups { grid-template-columns: 1fr 1fr; gap: 56px; }
+}
+.menu-tiers { display: grid; grid-template-columns: repeat(2, auto); gap: 4px 20px; text-align: right; }
+.menu-tiers span { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--text-soft); white-space: nowrap; }
+.menu-tiers span b { font-weight: 500; color: var(--ink); margin-left: 6px; }
+.menu-expand-toggle {
+  display: flex; align-items: center; gap: 6px; background: none; border: none; cursor: pointer;
+  font-family: 'Space Mono', monospace; font-size: 12px; color: var(--ink); padding: 3px 0;
+}
+.menu-expand-toggle svg { width: 12px; height: 12px; stroke: var(--text-soft); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.25s ease; }
+.menu-expand-toggle.open svg { transform: rotate(180deg); }
+.menu-tiers-panel { grid-column: 1 / -1; max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+.menu-tiers-panel.open { max-height: 120px; }
+.menu-tiers-panel .menu-tiers { padding-top: 10px; justify-content: flex-end; }
+
+/* ── ABOUT ── */
+.about-grid { display: flex; flex-direction: column; gap: 32px; }
+.about-photo { width: 100%; aspect-ratio: 4 / 3; border-radius: 16px; overflow: hidden; }
+.about-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.about-text p { font-size: 15px; line-height: 1.7; color: var(--text-soft); max-width: 560px; }
+.about-text p + p { margin-top: 20px; }
+.about-text .about-lead {
+  font-family: 'Instrument Serif', serif; font-size: clamp(24px, 2.8vw, 32px);
+  line-height: 1.25; color: var(--ink); max-width: 520px;
+}
+.about-lead strong { font-style: italic; font-weight: 400; }
+@media (min-width: 769px) {
+  .about-grid { flex-direction: row; align-items: center; gap: 56px; }
+  .about-photo { width: 38%; flex-shrink: 0; aspect-ratio: 4 / 5; }
+  .about-text { flex: 1; }
+}
+
+/* ── BOOKING ── */
+.booking-mini {
+  background: var(--ink); color: var(--blush); border-radius: 20px;
+  padding: 48px 44px; display: flex; flex-direction: column; gap: 32px;
+}
+.booking-mini-title { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(28px, 3.6vw, 40px); line-height: 1.1; letter-spacing: -0.01em; margin-bottom: 12px; color: var(--blush); }
+.booking-mini-copy { font-size: 14px; line-height: 1.6; color: rgba(250,232,237,0.65); max-width: 420px; }
+.booking-mini-action { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.booking-mini-note { font-family: 'Space Mono', monospace; font-size: 11px; font-style: italic; letter-spacing: 0.02em; color: rgba(250,232,237,0.5); }
+.btn-book-external { flex-shrink: 0; padding: 15px 30px; background: var(--blush); color: var(--ink); border-radius: 999px; font-size: 14px; letter-spacing: 0.02em; transition: background 0.2s; white-space: nowrap; }
+.btn-book-external:hover { background: var(--pink); }
+@media (min-width: 769px) {
+  .booking-mini { flex-direction: row; align-items: flex-end; justify-content: space-between; padding: 56px; gap: 48px; }
+  .booking-mini-action { align-items: flex-end; text-align: right; }
+}
+
+/* ── GALLERY — simple 2x2 grid ── */
+.gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.gallery-item {
+  position: relative; aspect-ratio: 1 / 1; border-radius: 16px; overflow: hidden;
+  background: linear-gradient(150deg, var(--g-a), var(--g-b));
+}
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.gallery-item:nth-child(1) { --g-a: var(--pink-deep); --g-b: var(--pink); }
+.gallery-item:nth-child(2) { --g-a: var(--ink); --g-b: #3a2c30; }
+.gallery-item:nth-child(3) { --g-a: var(--pink); --g-b: var(--blush); }
+.gallery-item:nth-child(4) { --g-a: #3a2c30; --g-b: var(--pink-deep); }
+@media (min-width: 769px) {
+  .gallery-grid { grid-template-columns: 2fr 1fr 1fr; }
+  .gallery-item:nth-child(1) { grid-row: span 2; aspect-ratio: auto; }
+  .gallery-item:nth-child(4) { grid-column: span 2; aspect-ratio: 2 / 1; }
+}
+
+/* ── REVIEWS ── */
+.reviews-grid { display: grid; grid-template-columns: 1fr; gap: 36px; }
+.review-card { background: transparent; border: none; padding: 0; }
+.review-stars { color: var(--pink-deep); font-size: 13px; letter-spacing: 2px; margin-bottom: 14px; }
+.review-quote { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 24px; line-height: 1.3; color: var(--ink); }
+.review-name { margin-top: 16px; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.04em; color: var(--text-soft); text-transform: uppercase; }
+@media (min-width: 769px) {
+  .reviews-grid { grid-template-columns: repeat(3, 1fr); gap: 48px; }
+}
+
+/* ── FOOTER ── */
+footer { padding: 64px 0 36px; border-top: 1px solid var(--line); margin-top: 24px; }
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 40px; margin-bottom: 44px; }
+footer h3 { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; font-size: clamp(28px, 3vw, 36px); margin-bottom: 10px; color: var(--ink); }
+footer p { color: var(--text-soft); font-size: 14px; line-height: 1.7; }
+.foot-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-soft); margin-bottom: 12px; }
+footer a.link-line { display: block; font-size: 14px; padding: 5px 0; border-bottom: 1px solid transparent; transition: border-color 0.2s; color: var(--text); }
+footer a.link-line:hover { border-color: var(--ink); }
+.foot-bottom { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px; font-size: 11px; color: var(--text-soft); font-family: 'Space Mono', monospace; }
+
+/* ── CONTACT DRAWER — FAQ first, then WhatsApp/email/call ── */
+.fab {
+  position: fixed; right: 24px; bottom: 24px; z-index: 60;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 12px;
+  opacity: 0; transform: translateY(14px); pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.fab.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.fab-panel {
+  width: 280px; max-width: 78vw; background: var(--white); border: 1px solid var(--line); border-radius: 16px;
+  box-shadow: 0 20px 44px -14px rgba(20,20,20,0.3);
+  max-height: 0; opacity: 0; overflow: hidden;
+  transition: max-height 0.32s ease, opacity 0.24s ease;
+}
+.fab-panel.open { max-height: 460px; opacity: 1; }
+.fab-panel-inner { padding: 20px; }
+.fab-faq-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-soft); margin-bottom: 10px; }
+.fab-faq-item { padding: 9px 0; border-top: 1px solid var(--line); }
+.fab-faq-item:first-of-type { border-top: none; }
+.fab-faq-q { font-family: 'Instrument Serif', serif; font-size: 15px; color: var(--ink); }
+.fab-faq-a { font-size: 12px; line-height: 1.5; color: var(--text-soft); margin-top: 3px; }
+.fab-contact-row { display: flex; gap: 8px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); }
+.fab-contact-row a {
+  flex: 1; display: flex; align-items: center; justify-content: center; height: 42px;
+  border-radius: 999px; background: var(--blush); transition: background 0.2s ease;
+}
+.fab-contact-row a:hover { background: var(--pink); }
+.fab-contact-row svg { width: 18px; height: 18px; stroke: var(--ink); fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.fab-whatsapp {
+  width: 58px; height: 58px; border-radius: 50%; border: none; cursor: pointer;
+  background: var(--pink-deep);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 10px 24px -8px rgba(20,20,20,0.45);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.fab-whatsapp:hover { background: var(--pink); transform: translateY(-2px); }
+.fab-whatsapp svg { width: 26px; height: 26px; stroke: var(--ink); fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.25s ease; }
+.fab-whatsapp.open svg { transform: rotate(90deg); }
+
+/* ── BOOKING REQUEST SHEET — collects the details, sends them to Irene on WhatsApp ── */
+.book-overlay {
+  position: fixed; inset: 0; z-index: 70;
+  background: rgba(20,20,20,0.45);
+  display: flex; align-items: flex-end; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
+}
+.book-overlay.open { opacity: 1; pointer-events: auto; }
+.book-sheet {
+  width: 100%; max-width: 480px; max-height: 92vh; overflow-y: auto;
+  background: var(--white); border-radius: 20px 20px 0 0;
+  padding: 28px 24px 32px;
+  transform: translateY(24px); transition: transform 0.3s ease;
+}
+.book-overlay.open .book-sheet { transform: translateY(0); }
+.book-sheet-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 24px; }
+.book-sheet-title { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 30px; line-height: 1.05; color: var(--ink); }
+.book-sheet-sub { margin-top: 6px; font-size: 13px; line-height: 1.5; color: var(--text-soft); }
+.book-close {
+  width: 36px; height: 36px; flex-shrink: 0; border-radius: 50%;
+  border: 1px solid var(--line); background: transparent; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.book-close svg { width: 14px; height: 14px; stroke: var(--ink); fill: none; stroke-width: 2; stroke-linecap: round; }
+.book-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+.book-field[hidden] { display: none; }
+.book-field label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-soft); }
+.book-field select, .book-field input, .book-field textarea {
+  width: 100%; font-family: 'Space Grotesk', sans-serif; font-size: 16px; color: var(--ink);
+  background-color: var(--blush); border: 1px solid transparent; border-radius: 12px;
+  padding: 12px 14px; -webkit-appearance: none; appearance: none;
+}
+.book-field select {
+  padding-right: 36px; cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23141414' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 14px center; background-size: 12px;
+}
+.book-field textarea { min-height: 76px; resize: vertical; }
+.book-field select:focus, .book-field input:focus, .book-field textarea:focus { outline: none; border-color: var(--ink); }
+.book-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.book-submit { width: 100%; justify-content: center; margin-top: 8px; }
+.book-fine { margin-top: 12px; font-size: 12px; line-height: 1.5; color: var(--text-soft); text-align: center; }
+@media (min-width: 769px) {
+  .book-overlay { align-items: center; }
+  .book-sheet { border-radius: 20px; padding: 36px; }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .wrap { padding: 0 20px; }
+  nav { padding: 12px 0; }
+  .nav-scrolled-links { gap: 14px; }
+  .nav-scrolled-links a { font-size: 10.5px; }
+  .section { padding: 56px 0; }
+  .menu-row { grid-template-columns: 30px 1fr; row-gap: 6px; }
+  .menu-meta { grid-column: 2; text-align: left; display: flex; gap: 10px; align-items: baseline; }
+  .menu-tiers { grid-column: 2; text-align: left; }
+  .menu-expand-toggle { grid-column: 2; justify-self: start; }
+  .menu-tiers-panel { grid-column: 2; }
+  .menu-tiers-panel .menu-tiers { justify-content: start; }
+  .menu-time { margin-top: 0; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .fab { right: 18px; bottom: 18px; }
+}
+
+@media (max-width: 480px) {
+  .wrap { padding: 0 16px; }
+  nav { padding: 10px 0; }
+  .hero h1 { font-size: clamp(44px, 13vw, 60px); }
+  .hero p { font-size: 14px; }
+  .hero-cta { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .section { padding: 48px 0; }
+  .booking-mini-title { font-size: clamp(28px, 8vw, 36px); }
+  .fab { right: 14px; bottom: 14px; }
+  .fab-whatsapp { width: 50px; height: 50px; }
+}
+
+/* ── HERO OVERRIDES (previously the inline <style> in index.html) ──
+   Two 4:5 images. Mobile = scroll-snap slider, desktop (769px+) = side by side. */
 .hero { min-height: 0; }
 .hero::after {
   content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
@@ -37,8 +414,20 @@
 .hero-content {
   position: absolute; inset: 0; min-height: 0;
   pointer-events: none;
+  max-width: 1100px; align-items: flex-start; text-align: left;
+  padding: 108px 32px 48px;
+}
+@media (max-width: 768px) {
+  .hero-content { padding: 96px 20px 32px; }
 }
 .hero-content a { pointer-events: auto; }
+
+/* Logo in the nav wordmark slot */
+.wordmark-logo {
+  display: block;
+  height: 32px;
+  width: auto;
+}
 
 @media (min-width: 769px) {
   .hero-media {
@@ -56,7 +445,7 @@
 
 <nav>
   <div class="wrap nav-inner">
-    <a href="#" class="wordmark">Alluring <span>Beauty Bar</span></a>
+    <a href="#" class="wordmark"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='32' viewBox='0 0 96 32'%3E%3Crect x='0.5' y='0.5' width='95' height='31' fill='none' stroke='%23141414' stroke-dasharray='3 3'/%3E%3Ctext x='48' y='20' text-anchor='middle' font-family='monospace' font-size='11' fill='%23141414'%3ELOGO%3C/text%3E%3C/svg%3E" alt="Alluring Beauty Bar" class="wordmark-logo"></a>
     <div class="nav-scrolled-links" id="navScrolledLinks">
       <a href="#services">Services</a>
       <a href="#book">Book</a>
@@ -81,14 +470,13 @@
 
 <section class="hero">
   <div class="hero-media">
-    <img src="nails-4.5" alt="Alluring Beauty Bar manicure">
-    <img src="toes-home" alt="Alluring Beauty Bar pedicure">
+    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cdefs%3E%3ClinearGradient id='g' x2='1' y2='1'%3E%3Cstop stop-color='%23F0AFC0'/%3E%3Cstop offset='1' stop-color='%233a2c30'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='4' height='5' fill='url(%23g)'/%3E%3C/svg%3E" alt="Alluring Beauty Bar manicure">
+    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cdefs%3E%3ClinearGradient id='g' x2='1' y2='1'%3E%3Cstop stop-color='%23FDD5DF'/%3E%3Cstop offset='1' stop-color='%23141414'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='4' height='5' fill='url(%23g)'/%3E%3C/svg%3E" alt="Alluring Beauty Bar pedicure">
   </div>
   <div class="hero-content">
     <h1>Nails that <em>feel</em> like you.</h1>
-    <p>I'm <strong>Irene</strong>, your nail girl in Rustenburg. I keep it to a few clients a week — gel, dip, and hand-painted sets — so you always get my full attention, not just a rushed set.</p>
     <div class="hero-cta">
-      <a href="#book" class="btn-primary">Book an appointment</a>
+      <a href="#book" class="btn-primary" data-book-open>Book an appointment</a>
     </div>
   </div>
 </section>
@@ -100,10 +488,10 @@
     </div>
     <div class="about-grid">
       <div class="about-photo">
-        <img src="FFAB30BB-FD6E-4EA3-B7B0-E166D663F767.png" alt="Irene at work">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'%3E%3Cdefs%3E%3ClinearGradient id='g' x2='1' y2='1'%3E%3Cstop stop-color='%23FDD5DF'/%3E%3Cstop offset='1' stop-color='%23F0AFC0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='4' height='3' fill='url(%23g)'/%3E%3C/svg%3E" alt="Irene at work">
       </div>
       <div class="about-text">
-        <p>Alluring Beauty Bar is a one-chair studio in Rustenburg, run solo by Irene — no big team, no rushed slots, just you in the chair getting the attention a proper set deserves.</p>
+        <p class="about-lead">I'm <strong>Irene</strong>, your nail girl in Rustenburg. Alluring Beauty Bar is my one-chair studio, and I keep it to a few clients a week — acrylic, gel, and hand-painted sets — so you always get my full attention, not just a rushed set.</p>
         <p>Every set is done by hand, start to finish, with freshly sanitized tools for every single client.</p>
       </div>
     </div>
@@ -115,6 +503,8 @@
     <div class="section-head">
       <h2>Services</h2>
     </div>
+    <div class="menu-groups">
+    <div class="menu-group">
     <div class="menu-group-label">Acrylic</div>
     <div class="menu-list">
       <div class="menu-row">
@@ -167,7 +557,9 @@
         </div>
       </div>
     </div>
+    </div>
 
+    <div class="menu-group">
     <div class="menu-group-label">Gel</div>
     <div class="menu-list">
       <div class="menu-row">
@@ -191,6 +583,8 @@
         </div>
       </div>
     </div>
+    </div>
+    </div>
   </div>
 </section>
 
@@ -205,7 +599,7 @@
         <p class="booking-mini-copy">I keep my calendar small so every client gets proper, unhurried time — appointments are usually confirmed within a few hours, so you're never left wondering.</p>
       </div>
       <div class="booking-mini-action">
-        <a href="#" class="btn-book-external">Book an appointment →</a>
+        <a href="#book" class="btn-book-external" data-book-open>Book an appointment →</a>
         <div class="booking-mini-note">A small deposit locks in your spot · free reschedule up to 48 hours before</div>
       </div>
     </div>
@@ -311,7 +705,190 @@
   </button>
 </div>
 
-<script src="script.js"></script>
+<div class="book-overlay" id="bookOverlay" aria-hidden="true">
+  <div class="book-sheet" role="dialog" aria-modal="true" aria-labelledby="bookTitle">
+    <div class="book-sheet-head">
+      <div>
+        <h2 class="book-sheet-title" id="bookTitle">Request a booking</h2>
+        <p class="book-sheet-sub">Irene confirms on WhatsApp, usually within a few hours.</p>
+      </div>
+      <button type="button" class="book-close" id="bookClose" aria-label="Close">
+        <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <form id="bookForm" novalidate>
+      <div class="book-field">
+        <label for="bookService">Service</label>
+        <select id="bookService" required>
+          <option value="" disabled selected>Choose a service</option>
+          <option value="Plain acrylic">Plain acrylic — from R180</option>
+          <option value="Gel overlay">Gel overlay — R180</option>
+          <option value="Pedicure">Pedicure — R120</option>
+          <option value="Gel pedicure">Gel pedicure — R100</option>
+          <option value="Soak-off">Soak-off — R50</option>
+        </select>
+      </div>
+      <div class="book-field" id="bookLengthField" hidden>
+        <label for="bookLength">Length</label>
+        <select id="bookLength">
+          <option value="Short">Short — R180</option>
+          <option value="Medium">Medium — R200</option>
+          <option value="Long">Long — R250</option>
+          <option value="X-long">X-long — R300</option>
+        </select>
+      </div>
+      <div class="book-row">
+        <div class="book-field">
+          <label for="bookDate">Preferred day</label>
+          <input type="date" id="bookDate" required>
+        </div>
+        <div class="book-field">
+          <label for="bookTime">Time</label>
+          <select id="bookTime">
+            <option value="Any time">Any time</option>
+            <option value="Morning">Morning</option>
+            <option value="Afternoon">Afternoon</option>
+          </select>
+        </div>
+      </div>
+      <div class="book-field">
+        <label for="bookName">Your name</label>
+        <input type="text" id="bookName" autocomplete="name" required>
+      </div>
+      <div class="book-field">
+        <label for="bookNote">Anything else (optional)</label>
+        <textarea id="bookNote" placeholder="Nail art, colours, inspo..."></textarea>
+      </div>
+      <button type="submit" class="btn-primary book-submit">Send on WhatsApp</button>
+      <p class="book-fine">A small deposit locks in your spot once Irene confirms.</p>
+    </form>
+  </div>
+</div>
+
+<!-- Booking request: opens the sheet and sends the details to WhatsApp.
+     Keep this for launch (or move it into script.js). Put Irene's number below. -->
+<script>
+(function () {
+  var WHATSAPP_NUMBER = '27000000000'; // country code + number, no + or spaces
+
+  var overlay = document.getElementById('bookOverlay');
+  var form = document.getElementById('bookForm');
+  var service = document.getElementById('bookService');
+  var lengthField = document.getElementById('bookLengthField');
+  var length = document.getElementById('bookLength');
+  var date = document.getElementById('bookDate');
+  var time = document.getElementById('bookTime');
+  var name = document.getElementById('bookName');
+  var note = document.getElementById('bookNote');
+  var lastTrigger = null;
+
+  function todayISO() {
+    var d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  }
+
+  function openSheet(e) {
+    if (e) e.preventDefault();
+    lastTrigger = e ? e.currentTarget : null;
+    date.min = todayISO();
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    setTimeout(function () { service.focus(); }, 50);
+  }
+
+  function closeSheet() {
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (lastTrigger) lastTrigger.focus();
+  }
+
+  document.querySelectorAll('[data-book-open]').forEach(function (btn) {
+    btn.addEventListener('click', openSheet);
+  });
+  document.getElementById('bookClose').addEventListener('click', closeSheet);
+  overlay.addEventListener('click', function (e) { if (e.target === overlay) closeSheet(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) closeSheet();
+  });
+
+  service.addEventListener('change', function () {
+    lengthField.hidden = service.value !== 'Plain acrylic';
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!service.value) { service.focus(); return; }
+    if (!date.value) { date.focus(); return; }
+    if (!name.value.trim()) { name.focus(); return; }
+
+    var parts = date.value.split('-');
+    var day = new Date(parts[0], parts[1] - 1, parts[2]).toLocaleDateString('en-ZA', {
+      weekday: 'long', day: 'numeric', month: 'long'
+    });
+    var svc = service.value === 'Plain acrylic' ? 'Plain acrylic (' + length.value + ')' : service.value;
+
+    var lines = [
+      "Hi Irene, I'd like to book:",
+      'Service: ' + svc,
+      'Day: ' + day,
+      'Time: ' + time.value,
+      'Name: ' + name.value.trim()
+    ];
+    if (note.value.trim()) lines.push('Note: ' + note.value.trim());
+
+    var url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(lines.join('\n'));
+    var win = window.open(url, '_blank', 'noopener');
+    if (!win) window.location.href = url;
+    closeSheet();
+  });
+})();
+</script>
+
+<!-- PREVIEW ONLY: stand-in for script.js so menus work in the preview.
+     For launch, delete this block and put back <script src="script.js"></script> -->
+<script>
+(function () {
+  var nav = document.querySelector('nav');
+  var hero = document.querySelector('.hero');
+  var navToggle = document.getElementById('navToggle');
+  var navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', function () {
+    var open = navLinks.classList.toggle('open');
+    navToggle.classList.toggle('open', open);
+    navToggle.setAttribute('aria-expanded', open);
+  });
+  navLinks.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      navLinks.classList.remove('open');
+      navToggle.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', false);
+    });
+  });
+  var acrylicToggle = document.getElementById('acrylicToggle');
+  var acrylicPanel = document.getElementById('acrylicPanel');
+  acrylicToggle.addEventListener('click', function () {
+    var open = acrylicPanel.classList.toggle('open');
+    acrylicToggle.classList.toggle('open', open);
+    acrylicToggle.setAttribute('aria-expanded', open);
+  });
+  var fab = document.querySelector('.fab');
+  var fabToggle = document.getElementById('fabToggle');
+  var fabPanel = document.getElementById('fabPanel');
+  fabToggle.addEventListener('click', function () {
+    var open = fabPanel.classList.toggle('open');
+    fabToggle.classList.toggle('open', open);
+    fabToggle.setAttribute('aria-expanded', open);
+  });
+  function onScroll() {
+    nav.classList.toggle('scrolled', window.scrollY > hero.offsetHeight - nav.offsetHeight);
+    fab.classList.toggle('visible', window.scrollY > 200);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
 
 </body>
 </html>
