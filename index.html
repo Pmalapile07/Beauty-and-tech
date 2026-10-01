@@ -8,31 +8,43 @@
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500&family=Space+Mono&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <style>
+/* Hero: two 4:5 images. Mobile = scroll-snap slider, desktop (769px+) = side by side.
+   Overrides styles.css, where .hero-media sat absolutely behind the text and
+   .hero-media img had height: 100% (which cancels aspect-ratio). */
+.hero { min-height: 0; }
+.hero::after {
+  content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(20,20,20,0.08) 0%, rgba(20,20,20,0.45) 65%, rgba(20,20,20,0.68) 100%);
+}
 .hero-media {
+  position: relative;
+  inset: auto;
   display: flex;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
 }
-
-.hero-media::-webkit-scrollbar {
-  display: none;
-}
-
+.hero-media::-webkit-scrollbar { display: none; }
+.hero-media::after { display: none; }
 .hero-media img {
   flex: 0 0 100%;
   width: 100%;
+  height: auto;
   aspect-ratio: 4 / 5;
   object-fit: cover;
   scroll-snap-align: start;
 }
+.hero-content {
+  position: absolute; inset: 0; min-height: 0;
+  pointer-events: none;
+}
+.hero-content a { pointer-events: auto; }
 
-@media (min-width: 768px) {
+@media (min-width: 769px) {
   .hero-media {
     overflow-x: visible;
     scroll-snap-type: none;
   }
-
   .hero-media img {
     flex: 1 1 0;
     min-width: 0;
@@ -69,8 +81,8 @@
 
 <section class="hero">
   <div class="hero-media">
-    <img src="nails-4.5.png" alt="Alluring Beauty Bar manicure">
-    <img src="toes-home.png" alt="Alluring Beauty Bar pedicure">
+    <img src="nails-4.5" alt="Alluring Beauty Bar manicure">
+    <img src="toes-home" alt="Alluring Beauty Bar pedicure">
   </div>
   <div class="hero-content">
     <h1>Nails that <em>feel</em> like you.</h1>
