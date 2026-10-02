@@ -89,13 +89,13 @@ nav {
   transition: color 0.2s ease; white-space: nowrap;
 }
 .nav-scrolled-links a:hover { color: var(--ink); }
-nav.scrolled .wordmark-logo { height: 40px; }
+nav.scrolled .wordmark-logo { height: 30px; }
 @media (min-width: 769px) {
   .nav-scrolled-links { display: flex; }
   .nav-toggle { display: none; }
 }
 
-/* Nav dropdown panel — hangs as part of the header, off-canvas until opened */
+/* Nav dropdown panel: hangs as part of the header, off-canvas until opened */
 .nav-links {
   position: absolute; top: 100%; left: 0; right: 0;
   background: #FFFFFF;
@@ -113,7 +113,7 @@ nav.scrolled .wordmark-logo { height: 40px; }
 .nav-links a:first-child { border-top: none; }
 .nav-links a:hover { color: var(--ink); background: rgba(0,0,0,0.04); }
 
-/* Hamburger toggle — both lines identical width/height */
+/* Hamburger toggle: both lines identical width/height */
 .nav-toggle {
   width: 32px; height: 24px;
   border: none; background: transparent; padding: 0;
@@ -128,7 +128,7 @@ nav.scrolled .wordmark-logo { height: 40px; }
 .nav-toggle.open span:nth-child(1) { transform: translateY(4.25px) rotate(45deg); background: var(--ink); }
 .nav-toggle.open span:nth-child(2) { transform: translateY(-4.25px) rotate(-45deg); background: var(--ink); }
 
-/* ── HERO — full-bleed photo behind the header, headline overlaid on top ── */
+/* ── HERO: full-bleed photo behind the header, headline overlaid on top ── */
 .hero { position: relative; min-height: 92vh; overflow: hidden; }
 .hero-media { position: absolute; inset: 0; z-index: 0; }
 .hero-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -176,7 +176,7 @@ nav.scrolled .wordmark-logo { height: 40px; }
   .split > .section-head { position: sticky; top: 104px; margin-bottom: 0; }
 }
 
-/* ── ABOUT — full-bleed photo beside a blush panel ── */
+/* ── ABOUT: blush text panel first, then the full-bleed photo ── */
 .section.about { padding: 0; }
 .about-split { display: grid; grid-template-columns: 1fr; }
 .about-photo { aspect-ratio: 4 / 5; overflow: hidden; }
@@ -198,7 +198,7 @@ nav.scrolled .wordmark-logo { height: 40px; }
   .about-panel { padding: 80px 64px; }
 }
 
-/* ── SERVICES — product-style cards: 2 across on mobile, 3 on desktop ── */
+/* ── SERVICES: product-style cards: 2 across on mobile, 3 on desktop ── */
 .service-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px 12px; }
 .service-card { display: flex; flex-direction: column; color: var(--ink); }
 .service-card-media {
@@ -226,7 +226,7 @@ nav.scrolled .wordmark-logo { height: 40px; }
   .service-grid { grid-template-columns: repeat(3, 1fr); gap: 40px 20px; }
 }
 
-/* ── BOOK — full-width black band ── */
+/* ── BOOK: full-width black band ── */
 .section.book-band { background: var(--ink); color: var(--white); text-align: center; }
 .book-band-inner { display: flex; flex-direction: column; align-items: center; }
 .book-band-title {
@@ -245,7 +245,7 @@ nav.scrolled .wordmark-logo { height: 40px; }
 .btn-book-external:hover { background: var(--white); }
 .booking-mini-note { margin-top: 16px; font-size: 12px; letter-spacing: 0.02em; color: rgba(255,255,255,0.5); }
 
-/* ── WORK — swipeable 4:5 strip on mobile, four across on desktop ── */
+/* ── WORK: swipeable 4:5 strip on mobile, four across on desktop ── */
 .gallery-grid {
   display: grid; grid-auto-flow: column; grid-auto-columns: 72%; gap: 12px;
   overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
@@ -264,7 +264,7 @@ nav.scrolled .wordmark-logo { height: 40px; }
   .gallery-grid { grid-auto-flow: row; grid-template-columns: repeat(4, 1fr); gap: 16px; overflow: visible; }
 }
 
-/* ── REVIEWS — large quotes beside the title ── */
+/* ── REVIEWS: large quotes beside the title ── */
 .reviews-list { display: grid; gap: 40px; }
 .review-card { border-top: 1px solid var(--ink); padding-top: 24px; }
 .review-card::before {
@@ -276,9 +276,9 @@ nav.scrolled .wordmark-logo { height: 40px; }
 .review-stars { color: var(--pink-deep); font-size: 12px; letter-spacing: 2px; }
 .review-name { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-soft); }
 
-/* ── FOOTER — black, logo across the top ── */
+/* ── FOOTER: black, logo across the top ── */
 footer { padding: 80px 0 36px; background: var(--ink); color: var(--white); }
-.foot-logo { display: block; width: 200px; max-width: 100%; height: auto; margin: 0 auto 56px; }
+.foot-logo { display: block; width: 280px; max-width: 100%; height: auto; margin: 0 auto 56px; }
 .footer-grid {
   display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 40px;
   padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.2); margin-bottom: 48px;
@@ -290,7 +290,7 @@ footer a.link-line { width: fit-content; border-bottom: 1px solid transparent; t
 footer a.link-line:hover { border-color: var(--pink-deep); }
 .foot-bottom { display: flex; justify-content: space-between; gap: 12px; font-size: 11px; letter-spacing: 0.08em; color: rgba(255,255,255,0.5); }
 
-/* ── CONTACT DRAWER — FAQ first, then WhatsApp/email/call ── */
+/* ── CONTACT DRAWER: FAQ first, then WhatsApp/email/call ── */
 .fab {
   position: fixed; right: 24px; bottom: 24px; z-index: 60;
   display: flex; flex-direction: column; align-items: flex-end; gap: 12px;
@@ -330,7 +330,7 @@ footer a.link-line:hover { border-color: var(--pink-deep); }
 .fab-whatsapp svg { width: 26px; height: 26px; stroke: var(--white); fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.25s ease; }
 .fab-whatsapp.open svg { transform: rotate(90deg); }
 
-/* ── BOOKING REQUEST SHEET — collects the details, sends them to Irene on WhatsApp ── */
+/* ── BOOKING REQUEST SHEET: collects the details, sends them to Irene on WhatsApp ── */
 .book-overlay {
   position: fixed; inset: 0; z-index: 70;
   background: rgba(20,20,20,0.45);
@@ -386,7 +386,7 @@ footer a.link-line:hover { border-color: var(--pink-deep); }
   .section { padding: 56px 0; }
   .footer-grid { grid-template-columns: 1fr; gap: 28px; }
   footer { padding: 56px 0 28px; }
-  .foot-logo { width: 160px; margin-bottom: 40px; }
+  .foot-logo { width: 220px; margin-bottom: 40px; }
   .fab { right: 18px; bottom: 18px; }
 }
 
@@ -437,15 +437,31 @@ footer a.link-line:hover { border-color: var(--pink-deep); }
 }
 .hero-content a { pointer-events: auto; }
 
+/* Slide progress: shows there's a second hero image to swipe to */
+.hero-progress {
+  position: absolute; left: 20px; right: 20px; bottom: 16px; z-index: 2;
+  height: 2px; background: rgba(255,255,255,0.35); overflow: hidden; pointer-events: none;
+}
+.hero-progress-fill {
+  display: block; height: 100%; width: 50%; background: var(--pink-deep);
+  transition: transform 0.15s linear;
+}
+@media (max-width: 768px) {
+  .hero-content { padding-bottom: 44px; }
+}
+@media (min-width: 769px) {
+  .hero-progress { display: none; }
+}
+
 /* Logo in the nav wordmark slot */
 .wordmark-logo {
   display: block;
-  height: 56px;
+  height: 40px;
   width: auto;
   transition: height 0.25s ease;
 }
 @media (max-width: 480px) {
-  .wordmark-logo { height: 46px; }
+  .wordmark-logo { height: 34px; }
 }
 
 @media (min-width: 769px) {
@@ -464,7 +480,7 @@ footer a.link-line:hover { border-color: var(--pink-deep); }
 
 <nav>
   <div class="wrap nav-inner">
-    <a href="#" class="wordmark"><img src="alluring.jpeg" alt="Alluring Beauty Bar" class="wordmark-logo"></a>
+    <a href="#" class="wordmark"><img src="alluring-logo-black.png" alt="Alluring Beauty Bar" class="wordmark-logo"></a>
     <div class="nav-scrolled-links" id="navScrolledLinks">
       <a href="#services">Services</a>
       <a href="#book">Book</a>
@@ -489,8 +505,8 @@ footer a.link-line:hover { border-color: var(--pink-deep); }
 
 <section class="hero">
   <div class="hero-media">
-    <img src="nails-4.5" alt="Alluring Beauty Bar manicure">
-    <img src="toes-home" alt="Alluring Beauty Bar pedicure">
+    <img src="nails-4.5.jpg" alt="Alluring Beauty Bar manicure">
+    <img src="toes-home.jpg" alt="Alluring Beauty Bar pedicure">
   </div>
   <div class="hero-content">
     <h1>Nails that <em>feel</em> like you.</h1>
@@ -498,19 +514,20 @@ footer a.link-line:hover { border-color: var(--pink-deep); }
       <a href="#book" class="btn-primary" data-book-open>Book an appointment</a>
     </div>
   </div>
+  <div class="hero-progress" aria-hidden="true"><span class="hero-progress-fill" id="heroProgress"></span></div>
 </section>
 
 <section class="section about" id="about">
   <div class="about-split">
-    <div class="about-photo">
-      <img src="A224F3C9-E622-4378-808F-A9E1530DF69C.png" alt="Irene at work" loading="lazy">
-    </div>
     <div class="about-panel">
       <div class="section-head">
         <h2>About</h2>
       </div>
-      <p class="about-lead">I'm <strong>Irene</strong>, your nail girl in Rustenburg. Alluring Beauty Bar is my one-chair studio, and I keep it to a few clients a week — acrylic, gel, and hand-painted sets — so you always get my full attention, not just a rushed set.</p>
+      <p class="about-lead">I'm <strong>Irene</strong>, your nail girl in Rustenburg. Alluring Beauty Bar is my one-chair studio. I keep it to a few clients a week, doing acrylic, gel and hand-painted sets, so you always get my full attention, not just a rushed set.</p>
       <p>Every set is done by hand, start to finish, with freshly sanitized tools for every single client.</p>
+    </div>
+    <div class="about-photo">
+      <img src="FFAB30BB-FD6E-4EA3-B7B0-E166D663F767.png" alt="Irene at work" loading="lazy">
     </div>
   </div>
 </section>
@@ -588,7 +605,7 @@ footer a.link-line:hover { border-color: var(--pink-deep); }
 <section class="section book-band" id="book">
   <div class="wrap book-band-inner">
     <h2 class="book-band-title">Book a <em>session</em></h2>
-    <p class="booking-mini-copy">I keep my calendar small so every client gets proper, unhurried time — appointments are usually confirmed within a few hours, so you're never left wondering.</p>
+    <p class="booking-mini-copy">I keep my calendar small so every client gets proper, unhurried time. Appointments are usually confirmed within a few hours, so you're never left wondering.</p>
     <a href="#book" class="btn-book-external" data-book-open>Book an appointment →</a>
     <div class="booking-mini-note">A small deposit locks in your spot · free reschedule up to 48 hours before</div>
   </div>
@@ -615,7 +632,7 @@ footer a.link-line:hover { border-color: var(--pink-deep); }
     </div>
     <div class="reviews-list">
       <div class="review-card">
-        <p class="review-quote">Every visit feels unhurried — like no one else exists but you.</p>
+        <p class="review-quote">Every visit feels unhurried, like no one else exists but you.</p>
         <div class="review-meta">
           <span class="review-stars">★★★★★</span>
           <span class="review-name">Naledi K.</span>
@@ -645,7 +662,7 @@ footer a.link-line:hover { border-color: var(--pink-deep); }
     <div class="footer-grid">
       <div>
         <div class="foot-label">Studio</div>
-        <p>A quiet studio in Rustenburg — one client at a time, and never any rush.</p>
+        <p>A quiet studio in Rustenburg. One client at a time, and never any rush.</p>
       </div>
       <div>
         <div class="foot-label">Connect</div>
@@ -672,15 +689,15 @@ footer a.link-line:hover { border-color: var(--pink-deep); }
       <div class="fab-faq-label">Quick answers</div>
       <div class="fab-faq-item">
         <div class="fab-faq-q">How do I book?</div>
-        <div class="fab-faq-a">Easiest way — tap "Book an appointment" above, or just message us below.</div>
+        <div class="fab-faq-a">Easiest way: tap "Book an appointment" above, or just message us below.</div>
       </div>
       <div class="fab-faq-item">
         <div class="fab-faq-q">Do you take walk-ins?</div>
-        <div class="fab-faq-a">By appointment only — just a few slots a day so everyone gets proper time.</div>
+        <div class="fab-faq-a">By appointment only. Just a few slots a day so everyone gets proper time.</div>
       </div>
       <div class="fab-faq-item">
         <div class="fab-faq-q">Can I reschedule?</div>
-        <div class="fab-faq-a">Life happens — free reschedule up to 48 hours before your slot.</div>
+        <div class="fab-faq-a">Life happens. Free reschedule up to 48 hours before your slot.</div>
       </div>
       <div class="fab-contact-row">
         <a href="https://wa.me/27827781234" target="_blank" rel="noopener" aria-label="Message on WhatsApp">
@@ -716,20 +733,20 @@ footer a.link-line:hover { border-color: var(--pink-deep); }
         <label for="bookService">Service</label>
         <select id="bookService" required>
           <option value="" disabled selected>Choose a service</option>
-          <option value="Plain acrylic">Plain acrylic — from R180</option>
-          <option value="Gel overlay">Gel overlay — R180</option>
-          <option value="Pedicure">Pedicure — R120</option>
-          <option value="Gel pedicure">Gel pedicure — R100</option>
-          <option value="Soak-off">Soak-off — R50</option>
+          <option value="Plain acrylic">Plain acrylic (from R180)</option>
+          <option value="Gel overlay">Gel overlay (R180)</option>
+          <option value="Pedicure">Pedicure (R120)</option>
+          <option value="Gel pedicure">Gel pedicure (R100)</option>
+          <option value="Soak-off">Soak-off (R50)</option>
         </select>
       </div>
       <div class="book-field" id="bookLengthField" hidden>
         <label for="bookLength">Length</label>
         <select id="bookLength">
-          <option value="Short">Short — R180</option>
-          <option value="Medium">Medium — R200</option>
-          <option value="Long">Long — R250</option>
-          <option value="X-long">X-long — R300</option>
+          <option value="Short">Short (R180)</option>
+          <option value="Medium">Medium (R200)</option>
+          <option value="Long">Long (R250)</option>
+          <option value="X-long">X-long (R300)</option>
         </select>
       </div>
       <div class="book-row">
@@ -879,6 +896,19 @@ footer a.link-line:hover { border-color: var(--pink-deep); }
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+
+  var heroMedia = document.querySelector('.hero-media');
+  var heroFill = document.getElementById('heroProgress');
+  var slides = heroMedia.children.length;
+  heroFill.style.width = (100 / slides) + '%';
+  function updateHeroProgress() {
+    var max = heroMedia.scrollWidth - heroMedia.clientWidth;
+    var p = max > 0 ? heroMedia.scrollLeft / max : 0;
+    heroFill.style.transform = 'translateX(' + (p * (slides - 1) * 100) + '%)';
+  }
+  heroMedia.addEventListener('scroll', updateHeroProgress, { passive: true });
+  window.addEventListener('resize', updateHeroProgress);
+  updateHeroProgress();
 })();
 </script>
 
